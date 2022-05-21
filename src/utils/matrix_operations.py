@@ -222,7 +222,6 @@ def sylvester_condition(matrix):
         aux_matrix = get_minor(matrix, i)
         if(laplace_determinant(aux_matrix) <= 0):
             return False
-
     return True
 
 print(get_minor([
