@@ -1,6 +1,5 @@
 import json
 
-
 def readTxtFile(path):
     with open(path, 'r') as f:
         content = f.readlines()
@@ -23,4 +22,19 @@ def formatMatrix(matrix):
     print(matrix)
     return newMatrix
 
-print(formatMatrix(readTxtFile("C:/Algebra-Linear-Computacional/src/task 1/file.txt")))
+def writeOutputFile(content):
+    with open('output.json', 'w') as outfile:
+        json.dump(content, outfile, indent=4)
+
+
+print(writeOutputFile({
+    'solution': {
+        'x': 1,
+        'y': 1,
+        'z': 1
+    },
+    'useErrors': '',
+    'det': 0,
+    'convergenceInterationNumber': 0,
+    'tol': ''
+}))
