@@ -203,9 +203,14 @@ def is_symmetric(matrix):
                 return False
     return True
 
+print(solve_linear_systems_with_upper_triangular([[8,-4,-2],[0,8,-3],[0,0,67/8]],[10,0,4]))
+
+
+'''
+
 matrix=[[1,2,3],[4,5,6],[7,8,9]]
 index=1
-print([[matrix[row][column]
+#print([[matrix[row][column]
     for row in range(index + 1)] for column in range(index + 1)])
 
 columns=[]
@@ -215,4 +220,4 @@ for column in range(index + 1):
         lines.append(matrix[row][column])
     columns.append(lines)
 
-print(columns)
+'''
