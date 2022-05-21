@@ -220,9 +220,12 @@ def get_minor(matrix, index):
 def sylvester_condition(matrix):
     for i in range(len(matrix)):
         aux_matrix = get_minor(matrix, i)
-        if(laplace_determinant(aux_matrix) <= 0):
-            return False
-    return True
+        if(laplace_determinant(aux_matrix) > 0):
+            return True
+    return False
+
+def is_positive_definite(matrix):
+    return sylvester_condition(matrix)
 
 print(get_minor([
     [4, 1, 2],
