@@ -1,6 +1,5 @@
 import json
 
-
 def readTxtFile(path):
     with open(path, 'r') as f:
         content = f.readlines()
@@ -22,7 +21,6 @@ def formatMatrix(matrix):
         newMatrix.append(newLine)
     print(matrix)
     return newMatrix
-
 
 def writeOutputFile(content):
     with open('output.json', 'w') as outfile:
