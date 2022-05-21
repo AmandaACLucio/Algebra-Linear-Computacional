@@ -203,8 +203,16 @@ def is_symmetric(matrix):
                 return False
     return True
 
-print(is_symmetric([
-    [4,1,2], 
-    [1,4,3],
-    [2,3,5]
-]))
+matrix=[[1,2,3],[4,5,6],[7,8,9]]
+index=1
+print([[matrix[row][column]
+    for row in range(index + 1)] for column in range(index + 1)])
+
+columns=[]
+for column in range(index + 1):
+    lines = []
+    for row in range(index + 1):
+        lines.append(matrix[row][column])
+    columns.append(lines)
+
+print(columns)
