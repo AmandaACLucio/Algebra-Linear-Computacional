@@ -203,8 +203,30 @@ def is_symmetric(matrix):
                 return False
     return True
 
-print(is_symmetric([
-    [4,1,2], 
-    [1,4,3],
-    [2,3,5]
-]))
+def get_minor(matrix, index):
+
+    if (index > (len(matrix) - 1)):
+        print ("O índice não pode ser maior que a ordem da matriz.")
+        return False
+
+    column = []
+    for j in range(index+1):
+        row = []
+        for i in range(index+1):
+            row.append(matrix[i][j])
+        column.append(row)
+    return column
+
+def sylvester_condition(matrix):
+    for i in range(len(matrix)):
+        aux_matrix = get_minor(matrix, i)
+        if(laplace_determinant(aux_matrix) <= 0):
+            return False
+
+    return True
+
+print(get_minor([
+    [4, 1, 2],
+    [1, 4, 3],
+    [2, 3, 5]
+], 1))
