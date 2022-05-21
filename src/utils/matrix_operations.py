@@ -73,9 +73,20 @@ def laplace_determinant(matrix):
         for k in range(num_rows):
             det += matrix[k][0]*((-1)**k) * laplace_determinant(get_submatrix(matrix, k))
     return det
-    
-print(laplace_determinant([
-    [4,7,3], 
-    [1,2,3],
+
+def is_symmetric(matrix):
+    # Verificando se a matriz é quadrada e se tem o mesmo número de elementos em todas as linhas
+    if any(len(i) != len(matrix) for i in matrix):
+        return False
+
+    for i in range(len(matrix)):
+        for j in range(i):
+            if matrix[i][j] != matrix[j][i]:
+                return False
+    return True
+
+print(is_symmetric([
+    [4,1,2], 
+    [1,4,3],
     [2,3,5]
 ]))
