@@ -1,4 +1,6 @@
 import numpy as np
+import copy as c
+
 
 def multiply_matrix_vector(vector, matrix):
 
@@ -24,8 +26,6 @@ def multiply_matrix_vector(vector, matrix):
         print("Não foi possível realizar a operação", e)
 
 
-
-
 def multiply_matrix_scalar(scalar, matrix):
 
     lines = len(matrix)
@@ -39,6 +39,7 @@ def multiply_matrix_scalar(scalar, matrix):
         result.append(line)
 
     return result
+
 
 def multiply_matrix_matrix(matrix1, matrix2):
 
@@ -162,3 +163,48 @@ def solve_linear_systems_with_upper_triangular(matrix, b):
     
     return result_x
 
+
+def get_submatrix(matrix, index):
+    sub_matrix = c.deepcopy(matrix)
+
+    # Removendo primeira coluna
+    for i in range(len(sub_matrix)):
+        sub_matrix[i] = sub_matrix[i][1:]
+
+    # Removendo linha selecionada
+    sub_matrix = sub_matrix[:index] + sub_matrix[index+1:]
+
+    return sub_matrix
+
+def laplace_determinant(matrix):
+    det = 0
+
+    num_columns = len(matrix[0])
+    num_rows = len(matrix)
+
+    if(num_rows != num_columns):
+        return "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
+
+    if (num_columns == 1):
+        det = matrix[0][0]
+    else:
+        for k in range(num_rows):
+            det += matrix[k][0]*((-1)**k) * laplace_determinant(get_submatrix(matrix, k))
+    return det
+
+def is_symmetric(matrix):
+    # Verificando se a matriz é quadrada e se tem o mesmo número de elementos em todas as linhas
+    if any(len(i) != len(matrix) for i in matrix):
+        return False
+
+    for i in range(len(matrix)):
+        for j in range(i):
+            if matrix[i][j] != matrix[j][i]:
+                return False
+    return True
+
+print(is_symmetric([
+    [4,1,2], 
+    [1,4,3],
+    [2,3,5]
+]))

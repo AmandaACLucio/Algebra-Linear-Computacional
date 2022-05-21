@@ -1,18 +1,18 @@
 import json
 
-def readTxtFile(path):
+def read_txt_file(path):
     with open(path, 'r') as f:
         content = f.readlines()
     return content
 
 
-def readJsonFile(path):
+def read_json_file(path):
     with open(path) as f:
         content = json.load(f)
     return content
 
 
-def formatMatrix(matrix):
+def format_matrix(matrix):
     newMatrix = []
     for i in matrix:
         newLine = i.replace('\n', '').split(' ')
@@ -22,12 +22,12 @@ def formatMatrix(matrix):
     print(matrix)
     return newMatrix
 
-def writeOutputFile(content):
+def write_output_file(content):
     with open('output.json', 'w') as outfile:
         json.dump(content, outfile, indent=4)
 
 
-print(writeOutputFile({
+print(write_output_file({
     'solution': {
         'x': 1,
         'y': 1,
