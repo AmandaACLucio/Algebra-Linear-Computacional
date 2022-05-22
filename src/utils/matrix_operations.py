@@ -1,7 +1,13 @@
 from re import T
 import numpy as np
 import copy as c
+import math
 
+def is_square_matrix(matrix):
+    # Verificando se a matriz é quadrada e se tem o mesmo número de elementos em todas as linhas
+    if any(len(i) != len(matrix) for i in matrix):
+        return False
+    return True
 
 def multiply_matrix_vector(matrix, vector):
 
@@ -90,7 +96,7 @@ def check_upper_triangular(matrix):
     lines = len(matrix)
     columns = len(matrix[0])
 
-    if(lines!=columns):
+    if(not is_square_matrix(matrix)):
         print("A matriz precisa ser quadrada para realizar essa operação")
         return -1
 
@@ -106,7 +112,7 @@ def check_lower_triangular(matrix):
     lines = len(matrix)
     columns = len(matrix[0])
 
-    if(lines!=columns):
+    if(not is_square_matrix(matrix)):
         print("A matriz precisa ser quadrada para realizar essa operação")
         return -1
 
@@ -155,12 +161,6 @@ def solve_linear_systems_with_upper_triangular(matrix, vector_b):
 
     return result_x
 
-def is_square_matrix(matrix):
-    # Verificando se a matriz é quadrada e se tem o mesmo número de elementos em todas as linhas
-    if any(len(i) != len(matrix) for i in matrix):
-        return False
-    return True
-
 def get_submatrix(matrix, index):
     sub_matrix = c.deepcopy(matrix)
 
@@ -176,8 +176,8 @@ def get_submatrix(matrix, index):
 def laplace_determinant(matrix):
     det = 0
 
+    lines = len(matrix)
     columns = len(matrix[0])
-    rows = len(matrix)
 
     if(not is_square_matrix(matrix)):
         print("Erro! Essa matriz não é quadrada. Tente com outros parâmetros!")
@@ -186,7 +186,7 @@ def laplace_determinant(matrix):
     if (columns == 1):
         det = matrix[0][0]
     else:
-        for k in range(rows):
+        for k in range(lines):
             det += matrix[k][0]*((-1)**k) * laplace_determinant(get_submatrix(matrix, k))
     return det
 
@@ -237,7 +237,35 @@ def norm_vector(vector):
         norma+=vector[i]**2
     
     norma=norma**0.5
-
     return norma
 
-print(norm_vector([2, 1, 7, -2]))
+def value_residue(vector_after, vector_before):
+
+    return norm_vector(sub_vector_vector(vector_after,vector_before))/norm_vector(vector_after)
+
+def converges(matrix):
+
+    lines = len(matrix)
+    columns = len(matrix[0])
+
+    if(not is_square_matrix(matrix)):
+        print("A matriz precisa ser quadrada para realizar essa operação")
+        return -1
+
+    for l in range(lines):
+        
+        sum_line = 0        
+        sum_column = 0  
+
+        for c in range(columns):
+
+            if(l != c):
+
+                sum_line += math.fabs(matrix[l][c])
+                sum_column += math.fabs(matrix[c][l])
+
+        if(sum_column>matrix[l][l] or sum_line>matrix[l][l]):
+            return False                
+
+    return True
+
