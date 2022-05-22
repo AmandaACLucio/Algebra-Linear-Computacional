@@ -206,29 +206,38 @@ def is_symmetric(matrix):
                 return False
     return True
 
-def get_minor(matrix, index):
+def get_minor(matrix, order):
 
-    if (index > (len(matrix) - 1)):
-        print ("O índice não pode ser maior que a ordem da matriz.")
+    if (order > (len(matrix) - 1)):
+        print ("A ordem da menor principal não pode ser maior que a ordem da matriz.")
         return False
 
     column = []
-    for j in range(index+1):
+    for i in range(order+1):
         row = []
-        for i in range(index+1):
+        for j in range(order+1):
             row.append(matrix[i][j])
         column.append(row)
+
     return column
 
 def sylvester_condition(matrix):
     for i in range(len(matrix)):
         aux_matrix = get_minor(matrix, i)
-        if(laplace_determinant(aux_matrix) <= 0):
-            return False
-    return True
+        if(laplace_determinant(aux_matrix) > 0):
+            return True
+    return False
+
+def is_positive_definite(matrix):
+    return sylvester_condition(matrix)
+
+def transposed_matrix(matrix):
+    transposed = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
+    print (transposed)
 
 print(get_minor([
-    [4, 1, 2],
-    [1, 4, 3],
-    [2, 3, 5]
-], 1))
+    [4, 1, 4, 5],
+    [2, 4, 3, 2],
+    [2, 3, 5, 9],
+    [2, 3, 5, 5]
+],3))
