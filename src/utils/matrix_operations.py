@@ -1,3 +1,4 @@
+from re import T
 import numpy as np
 import copy as c
 
@@ -148,6 +149,12 @@ def solve_linear_systems_with_upper_triangular(matrix, vector_b):
 
     return result_x
 
+def is_square_matrix(matrix):
+    # Verificando se a matriz é quadrada e se tem o mesmo número de elementos em todas as linhas
+    if any(len(i) != len(matrix) for i in matrix):
+        return False
+    return True
+
 def get_submatrix(matrix, index):
     sub_matrix = c.deepcopy(matrix)
 
@@ -164,24 +171,23 @@ def laplace_determinant(matrix):
     det = 0
 
     columns = len(matrix[0])
-    lines = len(matrix)
+    rows = len(matrix)
 
-    if(lines != columns):
+    if(not is_square_matrix(matrix)):
         print("Erro! Essa matriz não é quadrada. Tente com outros parâmetros!")
         return -1
 
     if (columns == 1):
         det = matrix[0][0]
     else:
-        for k in range(lines):
+        for k in range(rows):
             det += matrix[k][0]*((-1)**k) * laplace_determinant(get_submatrix(matrix, k))
     return det
 
 def is_symmetric(matrix):
-    # Verificando se a matriz é quadrada e se tem o mesmo número de elementos em todas as linhas
-    if any(len(i) != len(matrix) for i in matrix):
-        return False
-
+    if (not is_square_matrix(matrix)):
+        print("Essa matriz não é quadrada, tente com outro parâmetro")
+        return -1
     for i in range(len(matrix)):
         for j in range(i):
             if matrix[i][j] != matrix[j][i]:
@@ -217,9 +223,8 @@ def transposed_matrix(matrix):
     transposed = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
     print (transposed)
 
-print(get_minor([
-    [4, 1, 4, 5],
-    [2, 4, 3, 2],
-    [2, 3, 5, 9],
-    [2, 3, 5, 5]
-],3))
+print(is_symmetric([
+    [4, 1, 2],
+    [1, 4, 3],
+    [2, 3, 9],
+]))
