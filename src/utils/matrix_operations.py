@@ -2,7 +2,7 @@ import numpy as np
 import copy as c
 
 
-def multiply_matrix_vector(vector, matrix):
+def multiply_matrix_vector(matrix, vector):
 
     linesM = len(matrix)
     columnsM = len(matrix[0])
@@ -26,7 +26,7 @@ def multiply_matrix_vector(vector, matrix):
         print("Não foi possível realizar a operação", e)
 
 
-def multiply_matrix_scalar(scalar, matrix):
+def multiply_matrix_scalar(matrix,scalar):
 
     lines = len(matrix)
     columns = len(matrix[0])
@@ -64,6 +64,26 @@ def multiply_matrix_matrix(matrix1, matrix2):
         result.append(line)
     return result
 
+def sub_vector_vector(vector1, vector2):
+
+    vector_result = [vector1[linha]-vector2[linha] for linha in range(len(vector1))]
+
+    return vector_result
+
+def add_vector_vector(vector1, vector2):
+    
+    vector_result = [vector1[linha]+vector2[linha] for linha in range(len(vector1))]
+
+    return vector_result
+
+
+def mult_vector_scalar(vector, scalar):
+    
+    vector_result = [vector[linha]*scalar for linha in range(len(vector))]
+
+    return vector_result
+
+
 def check_upper_triangular(matrix):
     
     lines = len(matrix)
@@ -96,73 +116,55 @@ def check_lower_triangular(matrix):
     
     return True
 
-def solve_linear_systems_with_lower_triangular(matrix, b):
-    #Ax = b
+def backward_substitution(matrix_u, matrix_y):
+    number_of_rows = len(matrix_u)
+    matrix_x = [0 for i in range(number_of_rows)]
 
+    matrix_x[number_of_rows-1] = matrix_y[number_of_rows-1] / \
+        matrix_u[number_of_rows-1][number_of_rows-1]
+
+    for i in range(number_of_rows-2, -1, -1):
+        summation = matrix_y[i]
+        for j in range(i+1, number_of_rows):
+            summation -= matrix_u[i][j]*matrix_x[j]
+
+        matrix_x[i] = summation/float(matrix_u[i][i])
+
+    return matrix_x
+
+
+def solve_linear_systems_with_lower_triangular(matrix, vector_b):
     lines = len(matrix)
-    columns = len(matrix[0])
-
-    if(lines!=columns):
-        print("A matriz precisa ser quadrada para realizar essa operação")
-        return -1
-
-    '''if(matriz  invertível):
-        print("A matriz precisa ser quadrada para realizar essa operação")
-    return -1'''
-
-    result_x = []
-
-    for i in range(0, lines):
-
-
-        value_x = b[i]
-        ax_sum = 0
-        a_ii = matrix[i][i]
-
-        for j in range(0, i):
-            
-            ax_sum+=matrix[i][j]*result_x[j]
-
-        value_x-=ax_sum
-        value_x=value_x/a_ii
-
-        result_x.append(value_x)
     
+    result_x = np.zeros(lines)
+    
+    result_x[0] = vector_b[0]
+
+    for i in range(1, lines):
+        summation = vector_b[i]
+        for j in range(i):
+            summation -= matrix[i][j]*result_x[j]
+
+        result_x[i] = summation
+
     return result_x
+    
 
-def solve_linear_systems_with_upper_triangular(matrix, b):
-
+def solve_linear_systems_with_upper_triangular(matrix, vector_b):
     lines = len(matrix)
-    columns = len(matrix[0])
 
-    if(lines!=columns):
-        print("A matriz precisa ser quadrada para realizar essa operação")
-        return -1
+    result_x = np.zeros(lines)
 
-    '''if(matriz  invertível):
-        print("A matriz precisa ser quadrada para realizar essa operação")
-    return -1'''
+    result_x[lines-1] = vector_b[lines-1] /matrix[lines-1][lines-1]
 
-    result_x = np.zeros(columns)
-
-    for i in range(lines-1, -1, -1):
-
-
-        value_x = b[i]
-        ax_sum = 0
-        a_ii = matrix[i][i]
-
+    for i in range(lines-2, -1, -1):
+        ax_sum = vector_b[i]
         for j in range(i+1, lines):
-            
-            ax_sum+=matrix[i][j]*result_x[j]
+            ax_sum -= matrix[i][j]*result_x[j]
 
-        value_x-=ax_sum
-        value_x=value_x/a_ii
+        result_x[i] = ax_sum/float(matrix[i][i])
 
-        result_x[i]=value_x
-    
     return result_x
-
 
 def get_submatrix(matrix, index):
     sub_matrix = c.deepcopy(matrix)
@@ -179,16 +181,17 @@ def get_submatrix(matrix, index):
 def laplace_determinant(matrix):
     det = 0
 
-    num_columns = len(matrix[0])
-    num_rows = len(matrix)
+    columns = len(matrix[0])
+    lines = len(matrix)
 
-    if(num_rows != num_columns):
-        return "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
+    if(lines != columns):
+        print("Erro! Essa matriz não é quadrada. Tente com outros parâmetros!")
+        return -1
 
-    if (num_columns == 1):
+    if (columns == 1):
         det = matrix[0][0]
     else:
-        for k in range(num_rows):
+        for k in range(lines):
             det += matrix[k][0]*((-1)**k) * laplace_determinant(get_submatrix(matrix, k))
     return det
 
