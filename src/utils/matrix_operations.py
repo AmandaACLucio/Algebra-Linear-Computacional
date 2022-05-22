@@ -116,23 +116,6 @@ def check_lower_triangular(matrix):
     
     return True
 
-def backward_substitution(matrix_u, matrix_y):
-    number_of_rows = len(matrix_u)
-    matrix_x = [0 for i in range(number_of_rows)]
-
-    matrix_x[number_of_rows-1] = matrix_y[number_of_rows-1] / \
-        matrix_u[number_of_rows-1][number_of_rows-1]
-
-    for i in range(number_of_rows-2, -1, -1):
-        summation = matrix_y[i]
-        for j in range(i+1, number_of_rows):
-            summation -= matrix_u[i][j]*matrix_x[j]
-
-        matrix_x[i] = summation/float(matrix_u[i][i])
-
-    return matrix_x
-
-
 def solve_linear_systems_with_lower_triangular(matrix, vector_b):
     lines = len(matrix)
     
@@ -149,7 +132,6 @@ def solve_linear_systems_with_lower_triangular(matrix, vector_b):
 
     return result_x
     
-
 def solve_linear_systems_with_upper_triangular(matrix, vector_b):
     lines = len(matrix)
 
