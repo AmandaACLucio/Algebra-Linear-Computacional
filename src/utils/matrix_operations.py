@@ -130,7 +130,6 @@ def solve_linear_systems_with_lower_triangular(matrix, vector_b):
             summation -= matrix[i][j]*result_x[j]
 
         result_x[i] = summation
-
     return result_x
     
 def solve_linear_systems_with_upper_triangular(matrix, vector_b):
@@ -221,10 +220,10 @@ def is_positive_definite(matrix):
 
 def transposed_matrix(matrix):
     transposed = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
-    print (transposed)
+    return transposed
 
-print(is_symmetric([
-    [4, 1, 2],
-    [1, 4, 3],
-    [2, 3, 9],
-]))
+print(solve_linear_systems_with_upper_triangular([
+    [4, 1, 1],
+    [0, 4, 6],
+    [0, 0, 9],
+], [20, 10, 9]))

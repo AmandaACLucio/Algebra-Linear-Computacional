@@ -1,5 +1,5 @@
 import math
-from src.utils.matrix_operations import is_positive_definite, is_square_matrix, is_symmetric
+from src.utils.matrix_operations import check_lower_triangular, is_positive_definite, is_square_matrix, is_symmetric, solve_linear_systems_with_lower_triangular, solve_linear_systems_with_upper_triangular, transposed_matrix
 
 def cholesky_decomposition(matrix):
     # Verificando se a matriz é quadrada e se o nº de elementos por linha é o mesmo
@@ -29,12 +29,20 @@ def cholesky_decomposition(matrix):
             g[i][j] = round((matrix[i][j] - total)/g[j][j], 2)
     
     return g
-    
-print(cholesky_decomposition([
-    [1, 0.2, 0.4],
-    [0.2, 1, 0.5],
-    [0.4, 0.5, 1],
-]))
 
-
+def solve_by_cholesky(matrix, vector):
+    g = cholesky_decomposition(matrix)
     
+    if (not check_lower_triangular(g)):
+        print("A matriz não é triangular inferior.")
+        return -1
+
+    y = solve_linear_systems_with_upper_triangular(g, vector)
+
+    return solve_linear_systems_with_lower_triangular(transposed_matrix(g), y)
+    
+print('aqui', solve_by_cholesky([
+    [4, 12, -16],
+    [12, 37, -43],
+    [-16, -43, 98],
+], [1, 2, 3]))
