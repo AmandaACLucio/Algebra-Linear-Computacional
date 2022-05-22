@@ -1,5 +1,5 @@
 import copy
-from src.utils.matrix_operations import solve_linear_systems_with_lower_triangular,solve_linear_systems_with_upper_triangular, multiply_matrix_vector
+from src.utils.matrix_operations import solve_linear_systems_with_lower_triangular,solve_linear_systems_with_upper_triangular
 
 def decomposition_LU(matrix):
 
@@ -35,4 +35,4 @@ def solve_decomposition_LU(matrix, vector_b):
 
 
 
-solve_decomposition_LU([[2,3,-4,4],[-4,-7,11,-6],[6,11,-20,10],[-2,-7,22,-6]],[-1,5,-13,25])
+print(solve_decomposition_LU([[2,3,-4,4],[-4,-7,11,-6],[6,11,-20,10],[-2,-7,22,-6]],[-1,5,-13,25]))

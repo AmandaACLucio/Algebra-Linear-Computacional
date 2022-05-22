@@ -116,19 +116,25 @@ def check_lower_triangular(matrix):
     
     return True
 
-def solve_linear_systems_with_lower_triangular(matrix, vector_b):
+def solve_linear_systems_with_lower_triangular(matrix, vector_b, is_lu=True):
     lines = len(matrix)
     
     result_x = np.zeros(lines)
     
-    result_x[0] = vector_b[0]
+    if(is_lu):
+        result_x[0] = vector_b[0]
+    else:
+        result_x[0] = vector_b[0]/matrix[0][0]
 
     for i in range(1, lines):
-        summation = vector_b[i]
+        ax_sum = vector_b[i]
         for j in range(i):
-            summation -= matrix[i][j]*result_x[j]
+            ax_sum -= matrix[i][j]*result_x[j]
 
-        result_x[i] = summation
+        if(is_lu):
+            result_x[i] = ax_sum
+        else:
+            result_x[i]= ax_sum/matrix[i][i]
 
     return result_x
     
@@ -217,9 +223,15 @@ def transposed_matrix(matrix):
     transposed = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
     print (transposed)
 
-print(get_minor([
-    [4, 1, 4, 5],
-    [2, 4, 3, 2],
-    [2, 3, 5, 9],
-    [2, 3, 5, 5]
-],3))
+def norm_vector(vector):
+
+    norma=0
+
+    for i in range(len(vector)):
+        norma+=vector[i]**2
+    
+    norma=norma**0.5
+
+    return norma
+
+print(norm_vector([2, 1, 7, -2]))
