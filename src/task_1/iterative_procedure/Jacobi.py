@@ -18,6 +18,7 @@ def jacobiano(matrix, vector_b, max_tolerance):
     vector_old = [1 for x in range(lines)]
     vector_new = [0 for x in range(lines)]
     residue = 1
+    residue_historic =[1]
     step = 0
 
 
@@ -34,12 +35,13 @@ def jacobiano(matrix, vector_b, max_tolerance):
 
             vector_new[i]/=matrix[i][i]
 
-        residue = value_residue(vector_new, vector_old) 
+        residue = value_residue(vector_new, vector_old)
+        residue_historic.append(residue) 
 
         for i in range(lines):
             vector_old[i] = vector_new[i]
     
         step += 1    
     
-    return [vector_new, residue, step]
+    return [vector_new, residue_historic, step]
 

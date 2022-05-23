@@ -20,7 +20,7 @@ def multiply_matrix_vector(matrix, vector):
         return -1
 
     try:
-        result = np.zeros(linesM)
+        result = [0 for i in range(linesM)]
         for i in range(linesM):
             sum = 0
             for j in range(columnsM):
@@ -125,7 +125,7 @@ def check_lower_triangular(matrix):
 def solve_linear_systems_with_lower_triangular(matrix, vector_b, is_lu=True):
     lines = len(matrix)
     
-    result_x = np.zeros(lines)
+    result_x = [0 for i in range(lines)]
     
     if(is_lu):
         result_x[0] = vector_b[0]
@@ -147,7 +147,7 @@ def solve_linear_systems_with_lower_triangular(matrix, vector_b, is_lu=True):
 def solve_linear_systems_with_upper_triangular(matrix, vector_b):
     lines = len(matrix)
 
-    result_x = np.zeros(lines)
+    result_x = [0 for i in range(lines)]
 
     result_x[lines-1] = vector_b[lines-1] /matrix[lines-1][lines-1]
 
