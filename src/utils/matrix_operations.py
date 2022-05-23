@@ -47,7 +47,6 @@ def multiply_matrix_scalar(matrix,scalar):
 
     return result
 
-
 def multiply_matrix_matrix(matrix1, matrix2):
 
     linesM1= len(matrix1)
@@ -268,4 +267,54 @@ def converges(matrix):
             return False                
 
     return True
+
+def get_big_value(matrix):
+
+    lines = len(matrix)
+    columns = len(matrix[0])
+    the_big = -math.inf
+
+    index=[]
+
+    for i in range(lines):
+        for j in range(columns):
+
+            if(math.fabs(matrix[i][j])>the_big and i!=j):
+                the_big=matrix[i][j]
+                index=[i, j]
+    return [the_big, index]
+
+
+def calculate_phi(matrix, index):
+
+    i= index[0]
+    j= index[1]
+
+    a_ii = matrix[i][i]
+    a_jj = matrix[j][j]
+    a_ij = matrix[i][j]
+    
+    if(a_ii!=a_jj):
+        
+        value = 0.5*math.atan((2*a_ij)/(a_ii-a_jj))
+        return value
+    
+    return math.pi/4
+
+
+def calculate_matrix_p(matrix, index):
+    
+    lines = len(matrix)    
+    value_phi = calculate_phi(matrix, index)
+
+    matrix_p = [[float(i == j) for j in range(lines)] for i in range(lines)]
+
+
+    matrix_p[index[0]][index[0]] = math.cos(value_phi)
+    matrix_p[index[1]][index[1]] = math.cos(value_phi)
+    matrix_p[index[0]][index[1]] = -math.sin(value_phi)
+    matrix_p[index[1]][index[0]] = math.sin(value_phi)
+
+    return matrix_p
+
 
