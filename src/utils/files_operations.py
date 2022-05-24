@@ -28,11 +28,7 @@ def write_output_file(content):
 
 
 print(write_output_file({
-    'solution': {
-        'x': 1,
-        'y': 1,
-        'z': 1
-    },
+    'solution': ["x1", "x2", "x3", ..., "xn"],
     'useErrors': '',
     'det': 0,
     'convergenceInterationNumber': 0,
