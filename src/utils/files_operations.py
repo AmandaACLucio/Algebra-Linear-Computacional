@@ -1,4 +1,5 @@
 import json
+import os
 
 def read_txt_file(path):
     with open(path, 'r') as f:
@@ -7,7 +8,10 @@ def read_txt_file(path):
 
 
 def read_json_file(path):
-    with open(path) as f:
+    
+    path = os.path.join(os.path.dirname(__file__), path)
+
+    with open(path, encoding='utf-8-sig') as f:
         content = json.load(f)
     return content
 
@@ -23,14 +27,39 @@ def format_matrix(matrix):
     return newMatrix
 
 def write_output_file(content):
-    with open('output.json', 'w') as outfile:
+
+    path = "..\\..\\files\\outputs\\output.json"
+    path = os.path.join(os.path.dirname(__file__), path)
+
+    with open(path, 'w') as outfile:
+        print(content)
         json.dump(content, outfile, indent=4)
 
+def read_matrix_file(path):
+    
+    path = os.path.join(os.path.dirname(__file__), path)
 
-print(write_output_file({
-    'solution': ["x1", "x2", "x3", ..., "xn"],
-    'useErrors': '',
-    'det': 0,
-    'convergenceInterationNumber': 0,
-    'tol': ''
-}))
+
+    with open(path, 'r') as f:
+        content = f.readlines()
+    
+    matrix = []
+    for line in content:
+        matrix.append([float(n) for n in line.split()])
+    print(matrix)
+
+    return matrix
+
+def read_vector_file(path):
+    
+    path = os.path.join(os.path.dirname(__file__), path)
+
+
+    with open(path, 'r') as f:
+        content = f.readlines()
+    
+    matrix = []
+    for line in content:
+        matrix.append(float(line.split()[0]))
+    print(matrix)
+    return matrix

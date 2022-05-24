@@ -35,4 +35,4 @@ def solve_decomposition_LU(matrix, vector_b):
 
 
 
-print(solve_decomposition_LU([[2,3,-4,4],[-4,-7,11,-6],[6,11,-20,10],[-2,-7,22,-6]],[-1,5,-13,25]))
+#print(solve_decomposition_LU([[2,3,-4,4],[-4,-7,11,-6],[6,11,-20,10],[-2,-7,22,-6]],[-1,5,-13,25]))
