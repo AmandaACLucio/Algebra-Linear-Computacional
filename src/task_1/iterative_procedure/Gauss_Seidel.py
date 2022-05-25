@@ -42,9 +42,3 @@ def gauss_seidel(matrix, vector_b, max_tolerance):
         step += 1
 
     return [vector_new, residue_historic, step]
-
-print(gauss_seidel([
-    [10, 2, 3],
-    [1, 5, 1],
-    [2, 3, 10],
-], [7, -8, 6], 0.05))
