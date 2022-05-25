@@ -1,7 +1,8 @@
 from typing import OrderedDict
 from src.task_1.class_task1 import task_1
 from src.task_2.class_task2 import task_2
-from src.utils.files_operations import read_matrix_file, read_vector_file, read_json_file
+from src.task_3.class_task3 import task_3
+from src.utils.files_operations import read_matrix_file, read_vector_file, read_json_file, read_pairs_file
 
 def main(task):
 
@@ -11,8 +12,6 @@ def main(task):
 
         matrix_a = read_matrix_file(load_config["Path_Matrix_A"])
         vector_b = read_vector_file(load_config["Path_Vector_B"])
-        print(matrix_a)
-        print(vector_b)
 
         task_object= task_1(load_config["OrdemN"], load_config["ICOD"], load_config["IDET"], matrix_a, vector_b, load_config["TOLm"])
 
@@ -28,7 +27,13 @@ def main(task):
 
     elif(task==3):
         
-        matrix_a = read_matrix_file(load_config["Path_Matrix_A"])
+        [values_x, values_y] = read_pairs_file(load_config["Path_Pairs"])
 
+        xi=float(input("Escolha o ponto x para calcular o y aproximado "))
 
-main(1)
+        task_object= task_3(load_config["ICOD"], load_config["Number_pairs_points"], xi, values_x, values_y)
+
+        task_object.run()
+
+task = input("Escolha a task desejada ")
+main(int(task))

@@ -1,1 +1,48 @@
 # Algebra-Linear-Computacional
+
+Projeto realizado em python3 por Amanda Lucio e Nayara Gomes.
+
+## Table of Contents:
+- [Estrutura do projeto](#Estrutura)
+- [Como usar](#Como-usar)
+- [Como rodar](#Como-Rodar)
+
+## Estrutura do projeto
+
+O projeto foi estrutura visando a construção de uma pasta com programa reutilizádos por todas as tasks, dimunuindo a má prática de repetir trechos de código.
+
+```
+C:.
+├───files
+│   ├───inputs
+│   └───outputs
+└───src
+    ├───task_1
+    │   ├───decomposition
+    │   └───iterative_procedure
+    ├───task_2
+    |
+    ├───task_3
+    │
+    └───utils
+    
+```
+
+## Como usar
+
+O projeto possui uma pasta para [inputs](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/files/inputs), na mesma você precisará alterar o conteúdo dos arquivos .dat, de acordo com a task desejada. Além disso, é necessário alterar o arquivo de [configurações](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/blob/master/files/inputs/config.json) para selecionar o programa da task que deseja rodar e os outros flags.
+
+## Como rodar
+
+Para rodar basta usar o comando abaixo:
+
+```sh
+$ python runner.py
+> Escolha a task desejada
+```
+
+Desta forma, basta digitar o número da task correspondente:
+
+- 1. [Task1](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_1)
+- 2. [Task2](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_2)
+- 3. [Task3](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_3)
