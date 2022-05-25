@@ -2,6 +2,12 @@
 
 def solver_interpolation(values_x, values_y, xi):
     
+    use_errors = []
+
+    if(len(values_x)!=len(values_y)):
+        str_error = "A quantidade de parâmetros x deve ser igual a de parâmetro y"
+        return ["undefined", use_errors.append(str_error)]
+
     count_x = len(values_x)
 
     phis = []
@@ -21,4 +27,4 @@ def solver_interpolation(values_x, values_y, xi):
 
     value_y_to_xi = multiply_vector_vector(phis, values_y)
 
-    return value_y_to_xi
+    return [value_y_to_xi, use_errors]

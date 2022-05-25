@@ -22,25 +22,36 @@ class task_2:
                 'convergenceInterationNumber': 0,
             }
 
-        if(self.ICOD==1):
-            print("Power Method")
-            [eigen_values, eigen_vectors, steps] = [[],[], 0]
-            content['eigen_values'] = eigen_values
-            content['eigen_vectors'] = eigen_vectors
-            content['convergenceInterationNumber'] = steps
+        if(not isinstance(self.ICOD, int)):
+            content['useErrors'] = "Insira um ICOD inteiro no arquivo de configurações"
+        
+        else:
+
+            if(self.ICOD==1):
+                print("Power Method")
+                [eigen_values, eigen_vectors, steps, use_errors] = [[],[], 0]
+                content['eigen_values'] = eigen_values
+                content['eigen_vectors'] = eigen_vectors
+                content['convergenceInterationNumber'] = steps
+                content['useErrors'] = use_errors
 
 
-        elif(self.ICOD==2):
-            print("Jacobi Method")
-            [eigen_values, eigen_vectors, steps] = solver_jacobi(self.matrix_a, self.TOL_m)
-            content['eigen_values'] = eigen_values
-            content['eigen_vectors'] = eigen_vectors
-            content['convergenceInterationNumber'] = steps
 
+            elif(self.ICOD==2):
+                print("Jacobi Method")
+                [eigen_values, eigen_vectors, steps, use_errors] = solver_jacobi(self.matrix_a, self.TOL_m)
+                content['eigen_values'] = eigen_values
+                content['eigen_vectors'] = eigen_vectors
+                content['convergenceInterationNumber'] = steps
+                content['useErrors'] = use_errors
 
-        if(self.IDET>0):
+            if(not isinstance(self.IDET, int)):
+                content['useErrors'] = "Insira um IDET inteiro no arquivo de configurações"
+            
+            else:   
+                if(self.IDET>0):
 
-            content["determinant"] = laplace_determinant(self.matrix_a)
+                    content["determinant"] = laplace_determinant(self.matrix_a)
 
         write_output_file(content)
 

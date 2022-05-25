@@ -2,18 +2,22 @@
 
 def solver_jacobi(matrix, max_tolerance=0):
     
-    if (not is_symmetric(matrix)):
-        print("Não é possível utilizar esse método pois essa matriz não é simétrica")
-        return -1
+
+    steps=0
+    eigen_values=[]
+    eigen_vectors=[]
+    use_errors = []
+
+    [is_symmetric_bool, use_errors] = is_symmetric(matrix, use_errors)
+    if (not is_symmetric_bool):
+        str_error = "Não é possível utilizar esse método pois essa matriz não é simétrica"
+        return [eigen_values, eigen_vectors, steps, use_errors.append(str_error)]
 
     lines=len(matrix)
 
     
     [big_element_value, big_element_index] = get_big_value(matrix)
     matrix_x = [[float(i == j) for j in range(lines)] for i in range(lines)]
-
-    steps=0
-
 
     while(big_element_value>max_tolerance):
 
@@ -32,4 +36,4 @@ def solver_jacobi(matrix, max_tolerance=0):
 
     eigen_vectors =  transposed_matrix(matrix_x)
 
-    return [eigen_values, eigen_vectors, steps]
+    return [eigen_values, eigen_vectors, steps, use_errors]

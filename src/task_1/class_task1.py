@@ -21,35 +21,47 @@ class task_1:
     def run(self):
 
         content = {'solution': [],
-                'useErrors': '',
+                'useErrors': [],
                 'determinant': 0,
                 'convergenceInterationNumber': 0,
                 'historical_residues': ''
             }
-
-        if(self.ICOD==1):
-            print("LU")
-            soluction_LU = solve_decomposition_LU(self.matrix_a, self.vector_b)
-            content['solution'] = soluction_LU
-
-        elif(self.ICOD==2):
-            print("Cholesky")
-            soluction_Cholesky = solve_by_cholesky(self.matrix_a, self.vector_b)
-            content['solution'] = soluction_Cholesky
-
-        elif(self.ICOD==3):
-            print("Jacobi")
-            [soluction_Jacobi, historical_residues, step]= jacobiano(self.matrix_a, self.vector_b, self.TOL_m)
-            content['solution'] = soluction_Jacobi
-            content['convergenceInterationNumber'] = step
-            content['historical_residues'] = historical_residues
         
-        elif(self.ICOD==4):
-            print("Gauss-Seidel")
+        if(not isinstance(self.ICOD, int)):
+            content['useErrors'] = "Insira um ICOD inteiro no arquivo de configurações"
+        
+        else:
 
-        if(self.IDET>0):
+            if(self.ICOD==1):
+                print("LU")
+                [soluction_LU, use_errors]  = solve_decomposition_LU(self.matrix_a, self.vector_b)
+                content['solution'] = soluction_LU
+                content['useErrors'] = use_errors
 
-            content["determinant"] = laplace_determinant(self.matrix_a)
+
+            elif(self.ICOD==2):
+                print("Cholesky")
+                [soluction_Cholesky, use_errors] = solve_by_cholesky(self.matrix_a, self.vector_b)
+                content['solution'] = soluction_Cholesky
+                content['useErrors'] = use_errors
+
+            elif(self.ICOD==3):
+                print("Jacobi")
+                [soluction_Jacobi, historical_residues, step]= jacobiano(self.matrix_a, self.vector_b, self.TOL_m)
+                content['solution'] = soluction_Jacobi
+                content['convergenceInterationNumber'] = step
+                content['historical_residues'] = historical_residues
+            
+            elif(self.ICOD==4):
+                print("Gauss-Seidel")
+
+            if(not isinstance(self.IDET, int)):
+                content['useErrors'] = "Insira um IDET inteiro no arquivo de configurações"
+            
+            else:   
+                if(self.IDET>0):
+
+                    content["determinant"] = laplace_determinant(self.matrix_a)
 
         write_output_file(content)
 

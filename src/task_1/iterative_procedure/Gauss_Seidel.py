@@ -4,20 +4,20 @@ from src.utils.matrix_operations import converges, is_square_matrix, value_resid
 def gauss_seidel(matrix, vector_b, max_tolerance):
 
     lines = len(matrix)
-
-    if(not is_square_matrix(matrix)):
-        print("A matriz precisa ser quadrada para realizar essa operação")
-        return -1
-
-    if(not converges(matrix)):
-        print("A matriz não converge para o método jacobiano")
-        return -1
-
     vector_old = [1 for x in range(lines)]
     vector_new = [0 for x in range(lines)]
     residue = 1
     residue_historic = [1]
     step = 0
+    use_errors = []
+
+    if(not is_square_matrix(matrix)):
+        str_error = "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
+        return [vector_new, residue_historic, step, use_errors.append(str_error)]
+
+    if(not converges(matrix)):
+        str_error = "A matriz não converge para o método gauss-seidel"
+        return [vector_new, residue_historic, step, use_errors.append(str_error)]
 
     while(residue >= max_tolerance):
         for i in range(lines):
@@ -41,4 +41,4 @@ def gauss_seidel(matrix, vector_b, max_tolerance):
 
         step += 1
 
-    return [vector_new, residue_historic, step]
+    return [vector_new, residue_historic, step, use_errors]
