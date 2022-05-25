@@ -28,9 +28,9 @@ $ python runner.py
 
 Desta forma, basta digitar o número da task correspondente:
 
-- 1. [Task1](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_1)
-- 2. [Task2](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_2)
-- 3. [Task3](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_3)
+- [Task1](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_1)
+- [Task2](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_2)
+- [Task3](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_3)
 
 ## Exemplo
 
