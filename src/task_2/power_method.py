@@ -46,7 +46,7 @@ def power_method(matrix, tolerance=10**(-5)):
         print(residue)
         steps += 1
 
-    return eigenvalue, eigenvector, steps
+    return [eigenvalue, eigenvector, steps]
 
 # print(power_method([
 #     [1, 0.2, 0],
