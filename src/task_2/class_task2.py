@@ -51,7 +51,7 @@ class task_2:
             else:   
                 if(self.IDET>0):
 
-                    content["determinant"] = laplace_determinant(self.matrix_a)
+                    [content["determinant"], content['useErrors']]  = laplace_determinant(self.matrix_a)
 
         write_output_file(content)
 

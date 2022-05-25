@@ -16,7 +16,6 @@ def multiply_matrix_vector(matrix, vector, use_errors=[]):
     linesV = len(vector)
     result = [0 for i in range(linesM)]
 
-
     if(linesV!=len(matrix[0])):
         str_error = "A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas do vetor"
         return [result, use_errors.append(str_error)]
@@ -192,7 +191,7 @@ def laplace_determinant(matrix, use_errors=[]):
     else:
         for k in range(lines):
             det += matrix[k][0]*((-1)**k) * laplace_determinant(get_submatrix(matrix, k))
-    return det
+    return [det, use_errors]
 
 def is_symmetric(matrix, use_errors=[]):
     
@@ -333,13 +332,18 @@ def inverse_auxiliar_function(matrix, i, j):
     return [row[:j] + row[j+1:] for row in (matrix[:i]+matrix[i+1:])]
 
 
-def inverse_matrix(matrix):
+def inverse_matrix(matrix, use_errors=[]):
     
     matrix_cofactors = []
     
-    value_determinant = laplace_determinant(matrix)
+    [value_determinant, use_errors] = laplace_determinant(matrix)
+
+    if(len(use_errors)>0):
+
+        return [0, use_errors]
+
     if(value_determinant == 0):
-        return 0
+        return [0, use_errors]
 
     for i in range(len(matrix)):
 
@@ -358,7 +362,7 @@ def inverse_matrix(matrix):
 
             matrix_cofactors[i][j] = matrix_cofactors[i][j]/value_determinant
 
-    return matrix_cofactors
+    return [matrix_cofactors, use_errors]
 
 def calculate_matrix_p_regressao(values_x):
 
