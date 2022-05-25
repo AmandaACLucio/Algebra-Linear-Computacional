@@ -21,7 +21,7 @@ class task_3:
             }
 
         if(self.ICOD==1):
-            print("Interpoletion")
+            print("Interpolation")
             value_y_to_xi = solver_interpolation(self.values_x, self.values_y, self.xi)
             content['value_y_to_xi'] = value_y_to_xi
 
