@@ -1,5 +1,4 @@
-﻿from socket import fromfd
-from src.task_2.metodo_jacobi import solver_jacobi
+﻿from src.task_2.metodo_jacobi import solver_jacobi
 from src.utils.matrix_operations import laplace_determinant
 from src.utils.files_operations import write_output_file
 

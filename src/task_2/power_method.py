@@ -48,8 +48,8 @@ def power_method(matrix, tolerance=10**(-5)):
 
     return eigenvalue, eigenvector, steps
 
-print(power_method([
-    [1, 0.2, 0],
-    [0.2, 1, 0.5],
-    [0, 0.5, 1]
-], 10**(-3)))
+# print(power_method([
+#     [1, 0.2, 0],
+#     [0.2, 1, 0.5],
+#     [0, 0.5, 1]
+# ], 10**(-3)))

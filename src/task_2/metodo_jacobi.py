@@ -1,5 +1,4 @@
-﻿from tkinter import E
-from src.utils.matrix_operations import is_symmetric, get_big_value, calculate_matrix_p, transposed_matrix, multiply_matrix_matrix
+﻿from src.utils.matrix_operations import is_symmetric, get_big_value, calculate_matrix_p_jacobiano, transposed_matrix, multiply_matrix_matrix
 
 def solver_jacobi(matrix, max_tolerance=0):
     
@@ -18,7 +17,7 @@ def solver_jacobi(matrix, max_tolerance=0):
 
     while(big_element_value>max_tolerance):
 
-        matrix_p = calculate_matrix_p(matrix, big_element_index)
+        matrix_p = calculate_matrix_p_jacobiano(matrix, big_element_index)
         matrix_p_transposed = transposed_matrix(matrix_p)
 
         matrix = multiply_matrix_matrix(matrix_p_transposed,multiply_matrix_matrix(matrix, matrix_p))

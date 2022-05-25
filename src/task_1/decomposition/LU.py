@@ -32,7 +32,3 @@ def solve_decomposition_LU(matrix, vector_b):
     Solve_Ux_y=solve_linear_systems_with_upper_triangular(matrix_LU, Solve_Ly_b)
 
     return(Solve_Ux_y)
-
-
-
-#print(solve_decomposition_LU([[2,3,-4,4],[-4,-7,11,-6],[6,11,-20,10],[-2,-7,22,-6]],[-1,5,-13,25]))

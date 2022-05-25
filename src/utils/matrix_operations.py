@@ -1,5 +1,5 @@
+from cgi import print_form
 from re import T
-import numpy as np
 import copy as c
 import math
 
@@ -83,12 +83,19 @@ def add_vector_vector(vector1, vector2):
     return vector_result
 
 
-def mult_vector_scalar(vector, scalar):
+def multiply_vector_scalar(vector, scalar):
     
     vector_result = [vector[linha]*scalar for linha in range(len(vector))]
 
     return vector_result
 
+def multiply_vector_vector(vector1, vector2):
+    
+    sum = 0
+    for i in range(len(vector1)):
+        sum+=vector1[i]*vector2[i]
+
+    return sum
 
 def check_upper_triangular(matrix):
     
@@ -302,7 +309,7 @@ def calculate_phi(matrix, index):
     return math.pi/4
 
 
-def calculate_matrix_p(matrix, index):
+def calculate_matrix_p_jacobiano(matrix, index):
     
     lines = len(matrix)    
     value_phi = calculate_phi(matrix, index)
@@ -317,4 +324,57 @@ def calculate_matrix_p(matrix, index):
 
     return matrix_p
 
+def inverse_auxiliar_function(matrix, i, j):
+    return [row[:j] + row[j+1:] for row in (matrix[:i]+matrix[i+1:])]
 
+
+def inverse_matrix(matrix):
+    
+    matrix_cofactors = []
+    
+    value_determinant = laplace_determinant(matrix)
+    if(value_determinant == 0):
+        return 0
+
+    for i in range(len(matrix)):
+
+        line_cofactor = []
+
+        for j in range(len(matrix)):
+            minor = inverse_auxiliar_function(matrix, i, j)
+            line_cofactor.append(((-1)**(i+j)) * laplace_determinant(minor))
+
+        matrix_cofactors.append(line_cofactor)
+
+    matrix_cofactors = transposed_matrix(matrix_cofactors)
+
+    for i in range(len(matrix_cofactors)):
+        for j in range(len(matrix_cofactors)):
+
+            matrix_cofactors[i][j] = matrix_cofactors[i][j]/value_determinant
+
+    return matrix_cofactors
+
+def calculate_matrix_p_regressao(values_x):
+
+    matrix_p = []
+    count_x = len(values_x)
+
+    for i in range(count_x):
+        matrix_p.append(fatores_function(values_x[i]))
+    
+    return matrix_p
+
+def fatores_function(xi):
+
+    return [1, xi, xi**2]
+
+def value_function(xi, coeficients):
+
+    #a+bx+cx**2
+
+    a=coeficients[0]
+    b= coeficients[1]
+    c = coeficients[2]
+
+    return a+b*xi+c*(xi**2)
