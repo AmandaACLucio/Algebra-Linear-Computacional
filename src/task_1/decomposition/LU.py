@@ -10,7 +10,8 @@ def decomposition_LU(matrix):
 
     if(lines != columns):
         str_error = "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
-        return [matrix_LU, use_errors.append(str_error)]
+        use_errors.append(str_error)
+        return [matrix_LU, use_errors]
 
     for k in range(lines):
         for i in range(k+1, lines):
@@ -32,8 +33,11 @@ def solve_decomposition_LU(matrix, vector_b):
     if(len(use_errors)>0):
         return [matrix_LU, use_errors]
     
-    Solve_Ly_b = solve_linear_systems_with_lower_triangular(matrix_LU, vector_b)
+    [Solve_Ly_b, use_errors] = solve_linear_systems_with_lower_triangular(matrix_LU, vector_b)
 
-    Solve_Ux_y=solve_linear_systems_with_upper_triangular(matrix_LU, Solve_Ly_b)
+    if(len(use_errors)>0):
+        return [[], use_errors]
+
+    [Solve_Ux_y, use_errors]=solve_linear_systems_with_upper_triangular(matrix_LU, Solve_Ly_b)
 
     return [Solve_Ux_y, use_errors]

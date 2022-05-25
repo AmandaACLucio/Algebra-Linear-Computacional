@@ -7,17 +7,18 @@ def solver_multilinear_regression(values_x, values_y):
 
     if(len(values_x)!=len(values_y)):
         str_error = "A quantidade de parâmetros x deve ser igual a de parâmetro y"
-        return [matrix_b, use_errors.append(str_error)]
+        use_errors.append(str_error)
+        return [matrix_b, use_errors]
 
     matrix_p = calculate_matrix_p_regressao(values_x)
     matrix_p_transposed = transposed_matrix(matrix_p)
 
-    matrix_a = multiply_matrix_matrix(matrix_p_transposed, matrix_p)
-    matrix_c = multiply_matrix_vector(matrix_p_transposed, values_y)
+    [matrix_a, use_errors] = multiply_matrix_matrix(matrix_p_transposed, matrix_p)
+    [matrix_c, use_errors] = multiply_matrix_vector(matrix_p_transposed, values_y)
 
-    [matrix_a_inverse, use_errors] = inverse_matrix(matrix_a)
+    [matrix_a_inverse, use_errors] = inverse_matrix(matrix_a, use_errors)
 
-    matrix_b = multiply_matrix_vector(matrix_a_inverse, matrix_c)
+    [matrix_b, use_errors] = multiply_matrix_vector(matrix_a_inverse, matrix_c)
 
     return [matrix_b, use_errors]
 

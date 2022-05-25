@@ -6,7 +6,8 @@ def solver_interpolation(values_x, values_y, xi):
 
     if(len(values_x)!=len(values_y)):
         str_error = "A quantidade de parâmetros x deve ser igual a de parâmetro y"
-        return ["undefined", use_errors.append(str_error)]
+        use_errors.append(str_error)
+        return ["undefined", use_errors]
 
     count_x = len(values_x)
 

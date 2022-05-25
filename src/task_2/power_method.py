@@ -17,8 +17,8 @@ def power_method(matrix, tolerance=10**(-5)):
     eigenvalue = Y[0]
     steps = 1
 
-    if(len(use_errors>0)):
-        return [[], [], 0, use_errors]
+    if(len(use_errors)>0):
+        return ["undefined", [], 0, use_errors]
 
     for i in range(len(Y)):
         Y[i] /= eigenvalue
@@ -27,10 +27,11 @@ def power_method(matrix, tolerance=10**(-5)):
     residue = math.fabs(eigenvalue - initial_eigenvalue)/eigenvalue
     while (residue >= tolerance):
         initial_eigenvalue = eigenvalue
-        Y = multiply_matrix_vector(matrix, eigenvector)
+        
+        [Y, use_errors] = multiply_matrix_vector(matrix, eigenvector)
 
-        if( Y == -1):
-            return Y
+        if(len(use_errors)>0):
+            return ["undefined", [], 0, use_errors]
 
         eigenvalue = Y[0]
         

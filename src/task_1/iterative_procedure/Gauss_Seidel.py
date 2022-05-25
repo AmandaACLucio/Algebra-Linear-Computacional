@@ -13,11 +13,13 @@ def gauss_seidel(matrix, vector_b, max_tolerance):
 
     if(not is_square_matrix(matrix)):
         str_error = "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
-        return [vector_new, residue_historic, step, use_errors.append(str_error)]
+        use_errors.append(str_error)
+        return [vector_new, residue_historic, step, use_errors]
 
     if(not converges(matrix)):
         str_error = "A matriz não converge para o método gauss-seidel"
-        return [vector_new, residue_historic, step, use_errors.append(str_error)]
+        use_errors.append(str_error)
+        return [vector_new, residue_historic, step, use_errors]
 
     while(residue >= max_tolerance):
         for i in range(lines):
