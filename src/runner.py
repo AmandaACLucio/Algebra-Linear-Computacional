@@ -29,9 +29,7 @@ def main(task):
         
         [values_x, values_y] = read_pairs_file(load_config["Path_Pairs"])
 
-        xi=float(input("Escolha o ponto x para calcular o y aproximado "))
-
-        task_object= task_3(load_config["ICOD"], load_config["Number_pairs_points"], xi, values_x, values_y)
+        task_object= task_3(load_config["ICOD"], load_config["Number_pairs_points"], load_config["xi"], values_x, values_y)
 
         task_object.run()
 

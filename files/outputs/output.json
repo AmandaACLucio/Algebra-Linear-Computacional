@@ -1,7 +1,4 @@
 {
-    "eigen_values": [],
-    "eigen_vectors": [],
-    "useErrors": "",
-    "determinant": 0,
-    "convergenceInterationNumber": 0
+    "value_y_to_xi": 0.0,
+    "useErrors": ""
 }

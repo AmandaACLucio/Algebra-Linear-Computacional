@@ -43,15 +43,3 @@ def solve_by_cholesky(matrix, vector):
     y = solve_linear_systems_with_lower_triangular(g, vector, False)
 
     return solve_linear_systems_with_upper_triangular(transposed_matrix(g), y)
-    
-# print('aqui', solve_by_cholesky([
-#     [4, 12, -16],
-#     [12, 37, -43],
-#     [-16, -43, 98],
-# ], [1, 2, 3]))
-
-print('aqui', solve_by_cholesky([
-    [1, 0.2, 0.4],
-    [0.2, 1, 0.5],
-    [0.4, 0.5, 1],
-], [0.6, -0.3, -0.6]))

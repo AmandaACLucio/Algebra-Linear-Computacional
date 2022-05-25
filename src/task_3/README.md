@@ -34,5 +34,5 @@ Desta forma, basta digitar o número da task correspondente:
 
 ## Exemplo
 
-- Entrada: [pairs]()
-- Saída: [output]()
+- [Entrada](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/files/inputs/Teste_3)
+- [Saída](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/files/outputs/Teste_3)

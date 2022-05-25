@@ -42,3 +42,5 @@ def jacobiano(matrix, vector_b, max_tolerance):
             vector_old[i] = vector_new[i]
     
         step += 1
+    
+    return [vector_new, residue_historic, step]
