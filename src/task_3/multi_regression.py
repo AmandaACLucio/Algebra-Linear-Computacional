@@ -1,4 +1,6 @@
-﻿from src.utils.matrix_operations import calculate_matrix_p_regressao, transposed_matrix, multiply_matrix_matrix, inverse_matrix, multiply_matrix_vector, value_function
+﻿from src.utils.matrix_operations import calculate_matrix_p_regressao, transposed_matrix, multiply_matrix_matrix, multiply_matrix_vector, value_function
+
+from src.task_2.metodo_jacobi import inverse_matrix
 
 def solver_multilinear_regression(values_x, values_y):
 

@@ -38,5 +38,79 @@ def solver_jacobi(matrix, max_tolerance=0, use_errors=[]):
     eigen_values = [matrix[i][j] for i in range(lines) for j in range(lines) if i==j]
 
     eigen_vectors =  transposed_matrix(matrix_x)
+    determinant = 1
 
-    return [eigen_values, eigen_vectors, steps, use_errors]
+    for i in eigen_values:
+        determinant*=i
+
+
+    return [eigen_values, eigen_vectors, steps, determinant, use_errors]
+
+
+def inverse_auxiliar_function(matrix, i, j):
+    return [row[:j] + row[j+1:] for row in (matrix[:i]+matrix[i+1:])]
+
+
+def inverse_matrix(matrix, use_errors=[]):
+    
+    matrix_cofactors = []
+    
+    value_determinant = solver_jacobi(matrix, 0.00001)[3]
+
+    if(len(use_errors)>0):
+
+        return [0, use_errors]
+
+    if(value_determinant == 0):
+        return [0, use_errors]
+
+    for i in range(len(matrix)):
+
+        line_cofactor = []
+
+        for j in range(len(matrix)):
+            minor = inverse_auxiliar_function(matrix, i, j)
+            determinant = solver_jacobi(minor, 0.00001)[3]
+            line_cofactor.append(((-1)**(i+j)) * determinant)
+
+        matrix_cofactors.append(line_cofactor)
+
+    matrix_cofactors = transposed_matrix(matrix_cofactors)
+
+    for i in range(len(matrix_cofactors)):
+        for j in range(len(matrix_cofactors)):
+
+            matrix_cofactors[i][j] = matrix_cofactors[i][j]/value_determinant
+
+    return [matrix_cofactors, use_errors]
+
+
+def get_minor(matrix, order):
+
+    if (order > (len(matrix) - 1)):
+        print ("A ordem da menor principal não pode ser maior que a ordem da matriz.")
+        return False
+
+    column = []
+    for i in range(order+1):
+        row = []
+        for j in range(order+1):
+            row.append(matrix[i][j])
+        column.append(row)
+
+    return column
+
+def sylvester_condition(matrix, use_errors=[]):
+    for i in range(len(matrix)):
+        aux_matrix = get_minor(matrix, i)
+        det = solver_jacobi(aux_matrix, 0.00001)[3]
+
+        if(len(use_errors)>0):
+            return [False, use_errors]
+
+        if( det > 0):
+            return [True, use_errors]
+    return [False, use_errors]
+
+def is_positive_definite(matrix, use_errors=[]):
+    return [sylvester_condition(matrix), use_errors]

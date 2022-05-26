@@ -1,6 +1,5 @@
 ﻿from src.task_2.metodo_jacobi import solver_jacobi
 from src.task_2.power_method import power_method
-from src.utils.matrix_operations import laplace_determinant
 from src.utils.files_operations import write_output_file
 
 class task_2:
@@ -45,7 +44,7 @@ class task_2:
 
                 elif(self.ICOD==2):
                     print("Jacobi Method")
-                    [eigen_values, eigen_vectors, steps, use_errors] = solver_jacobi(self.matrix_a, self.TOL_m)
+                    [eigen_values, eigen_vectors, steps, determinant, use_errors] = solver_jacobi(self.matrix_a, self.TOL_m)
                     content['eigen_values'] = eigen_values
                     content['eigen_vectors'] = eigen_vectors
                     content['convergenceInterationNumber'] = steps
@@ -57,7 +56,7 @@ class task_2:
             else:   
                 if(self.IDET>0):
 
-                    [content["determinant"], content['useErrors']]  = laplace_determinant(self.matrix_a)
+                    content["determinant"] = solver_jacobi(self.matrix_a, self.TOL_m)[3]
 
         write_output_file(content)
 

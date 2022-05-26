@@ -3,8 +3,9 @@ from src.task_1.decomposition.LU import solve_decomposition_LU
 from src.task_1.decomposition.Cholesky import solve_by_cholesky
 from src.task_1.iterative_procedure.Jacobi import jacobiano
 from src.task_1.iterative_procedure.Gauss_Seidel import gauss_seidel
-from src.utils.matrix_operations import laplace_determinant
 from src.utils.files_operations import write_output_file
+from src.task_2.metodo_jacobi import solver_jacobi
+
 
 class task_1:
 
@@ -44,7 +45,6 @@ class task_1:
                 content['solution'] = soluction_LU
                 content['useErrors'] = use_errors
 
-
             elif(self.ICOD==2):
                 print("Cholesky")
                 [soluction_Cholesky, use_errors] = solve_by_cholesky(self.matrix_a, self.vector_b)
@@ -79,8 +79,9 @@ class task_1:
             else:   
                 if(self.IDET>0):
 
-                    [content["determinant"], content['useErrors']]  = laplace_determinant(self.matrix_a)
+                    content["determinant"] = solver_jacobi(self.matrix_a, self.TOL_m)[3]
                     
-        write_output_file(content)
+            
+            write_output_file(content)
 
         

@@ -1,11 +1,11 @@
-import copy
+import copy as c
 from src.utils.matrix_operations import solve_linear_systems_with_lower_triangular,solve_linear_systems_with_upper_triangular
 
 def decomposition_LU(matrix):
 
     columns = len(matrix[0])
     lines = len(matrix)
-    matrix_LU = copy.deepcopy(matrix)
+    matrix_LU = c.deepcopy(matrix)
     use_errors = []
 
     if(lines != columns):

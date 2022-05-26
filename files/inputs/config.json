@@ -1,6 +1,6 @@
 ﻿{
-    "OrdemN":"",
-    "ICOD":1,
+    "OrdemN":14,
+    "ICOD":2,
     "IDET":1,
     "Path_Matrix_A":"..\\..\\files\\inputs\\mat_A_02.dat",
     "Path_Vector_B":"..\\..\\files\\inputs\\vet_B_02.dat",

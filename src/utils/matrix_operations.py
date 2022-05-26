@@ -183,35 +183,12 @@ def solve_linear_systems_with_upper_triangular(matrix, vector_b, use_errors=[]):
     return [result_x, use_errors]
 
 def get_submatrix(matrix, index):
-    sub_matrix = c.deepcopy(matrix)
+    secondary = c.deepcopy(matrix)
 
-    # Removendo primeira coluna
-    for i in range(len(sub_matrix)):
-        sub_matrix[i] = sub_matrix[i][1:]
+    for row in range(len(secondary)):
+        secondary[row] = secondary[row][1:]
 
-    # Removendo linha selecionada
-    sub_matrix = sub_matrix[:index] + sub_matrix[index+1:]
-
-    return sub_matrix
-
-def laplace_determinant(matrix, use_errors=[]):
-    det = 0
-
-    lines = len(matrix)
-    columns = len(matrix[0])
-
-    if (not is_square_matrix(matrix)):
-        str_error = "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
-        use_errors.append(str_error)
-        return [det, use_errors]
-
-    if (columns == 1):
-        det = matrix[0][0]
-    else:
-        for k in range(lines):
-            [determinant_value, use_errors]= laplace_determinant(get_submatrix(matrix, k), use_errors)
-            det += matrix[k][0]*((-1)**k) * determinant_value
-    return [det, use_errors]
+    return secondary[:index] + secondary[index+1:]
 
 def is_symmetric(matrix, use_errors=[]):
     
@@ -244,7 +221,7 @@ def get_minor(matrix, order):
 def sylvester_condition(matrix, use_errors=[]):
     for i in range(len(matrix)):
         aux_matrix = get_minor(matrix, i)
-        [det, use_errors]= laplace_determinant(aux_matrix)
+        det = laplace_determinant(aux_matrix)
 
         if(len(use_errors)>0):
             return [False, use_errors]
@@ -357,7 +334,7 @@ def inverse_matrix(matrix, use_errors=[]):
     
     matrix_cofactors = []
     
-    [value_determinant, use_errors] = laplace_determinant(matrix)
+    value_determinant = solver_jacobi(matrix, 0.00001)[3]
 
     if(len(use_errors)>0):
 
@@ -372,7 +349,7 @@ def inverse_matrix(matrix, use_errors=[]):
 
         for j in range(len(matrix)):
             minor = inverse_auxiliar_function(matrix, i, j)
-            [determinant, use_errors] = laplace_determinant(minor, use_errors)
+            determinant = solver_jacobi(minor, 0.00001)[3]
             line_cofactor.append(((-1)**(i+j)) * determinant)
 
         matrix_cofactors.append(line_cofactor)
@@ -401,8 +378,8 @@ def fatores_function(xi):
     "calculos feitos para cada"
     "ex: a+bx+c**2 -> [1, x, x**2]"
 
-    return [1, xi, xi**2]
-    #return [1/(math.e**xi), math.log(xi)]
+    #return [1, xi, xi**2]
+    return [1/(math.e**xi), math.log(xi)]
 
 def value_function(xi, coeficients):
 
@@ -410,7 +387,7 @@ def value_function(xi, coeficients):
 
     a=coeficients[0]
     b= coeficients[1]
-    c = coeficients[2]
+    #c = coeficients[2]
 
-    return a+b*x+c*(x**2)
-    #return a*1/(math.e**xi)+b*math.log(xi)
+    #return a+b*x+c*(x**2)
+    return a*1/(math.e**xi)+b*math.log(xi)
