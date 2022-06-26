@@ -19,19 +19,23 @@ class task_3:
         content = {'value_y_to_xi': [],
                 'useErrors': ''
             }
+        if(not isinstance(self.ICOD, int)):
+            content['useErrors'] = "Insira um ICOD inteiro no arquivo de configurações"
+        
+        else:
+            if(self.ICOD==1):
+                print("Interpoletion")
+                [value_y_to_xi, use_errors]  = solver_interpolation(self.values_x, self.values_y, self.xi)
+                content['value_y_to_xi'] = value_y_to_xi
+                content['useErrors'] = use_errors
 
-        if(self.ICOD==1):
-            print("Interpolation")
-            value_y_to_xi = solver_interpolation(self.values_x, self.values_y, self.xi)
-            content['value_y_to_xi'] = value_y_to_xi
+            elif(self.ICOD==2):
+                print("Regression Multilinear")
+                [value_y_to_xi, use_errors] = find_value(self.values_x, self.values_y, self.xi)
+                content['value_y_to_xi'] = value_y_to_xi
+                content['useErrors'] = use_errors
 
 
-        elif(self.ICOD==2):
-            print("Regression Multilinear")
-            value_y_to_xi = find_value(self.values_x, self.values_y, self.xi)
-            content['value_y_to_xi'] = value_y_to_xi
-
-
-        write_output_file(content)
+            write_output_file(content)
 
         

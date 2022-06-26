@@ -30,6 +30,8 @@ def write_output_file(content):
     path = "..\\..\\files\\outputs\\output.json"
     path = os.path.join(os.path.dirname(__file__), path)
 
+    print("leia o arquivo de saída: \n", content)
+
     with open(path, 'w') as outfile:
         json.dump(content, outfile, indent=4)
 

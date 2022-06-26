@@ -9,28 +9,25 @@ def is_square_matrix(matrix):
         return False
     return True
 
-def multiply_matrix_vector(matrix, vector):
+def multiply_matrix_vector(matrix, vector, use_errors=[]):
 
     linesM = len(matrix)
     columnsM = len(matrix[0])
     linesV = len(vector)
+    result = [0*x for x in range(linesM)]
 
     if(linesV!=len(matrix[0])):
-        print("A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas do vetor")
-        return -1
+        str_error = "A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas do vetor"
+        use_errors.append(str_error)
+        return [result, use_errors]
 
-    try:
-        result = [0 for i in range(linesM)]
-        for i in range(linesM):
-            sum = 0
-            for j in range(columnsM):
-                sum+=matrix[i][j]*vector[j]
-            result[i]=sum
+    for i in range(linesM):
+        sum = 0
+        for j in range(columnsM):
+            sum+=matrix[i][j]*vector[j]
+        result[i]=sum
 
-        return result
-
-    except Exception as e:
-        print("Não foi possível realizar a operação", e)
+    return [result, use_errors]
 
 
 def multiply_matrix_scalar(matrix,scalar):
@@ -47,17 +44,20 @@ def multiply_matrix_scalar(matrix,scalar):
 
     return result
 
-def multiply_matrix_matrix(matrix1, matrix2):
+def multiply_matrix_matrix(matrix1, matrix2, use_errors=[]):
 
     linesM1= len(matrix1)
     columnsM1 = len(matrix1[0])
     linesM2 = len(matrix2)
     columnsM2 = len(matrix2[0])
 
+    result=[]
+
 
     if(columnsM1!=linesM2):
-        print("A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas da matriz 2")
-        return -1
+        str_error = "A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas da matriz 2"
+        use_errors.append(str_error)
+        return [result, use_errors]
 
     result=[]
     for i in range(linesM1):
@@ -68,7 +68,8 @@ def multiply_matrix_matrix(matrix1, matrix2):
                 sum += matrix1[i][k] * matrix2[k][j]
             line.append(sum)
         result.append(line)
-    return result
+        
+    return [result, use_errors]
 
 def sub_vector_vector(vector1, vector2):
 
@@ -129,9 +130,16 @@ def check_lower_triangular(matrix):
     
     return True
 
-def solve_linear_systems_with_lower_triangular(matrix, vector_b, is_lu=True):
-    lines = len(matrix)
+def solve_linear_systems_with_lower_triangular(matrix, vector_b, is_lu=True, use_errors=[]):
     
+    lines = len(matrix)
+    linesV = len(vector_b)
+
+    if(linesV!=len(matrix[0])):
+        str_error = "A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas do vetor"
+        use_errors.append(str_error)
+        return [[], use_errors]
+
     result_x = [0 for i in range(lines)]
     
     if(is_lu):
@@ -149,10 +157,17 @@ def solve_linear_systems_with_lower_triangular(matrix, vector_b, is_lu=True):
         else:
             result_x[i]= ax_sum/matrix[i][i]
 
-    return result_x
+    return [result_x, use_errors]
     
-def solve_linear_systems_with_upper_triangular(matrix, vector_b):
+def solve_linear_systems_with_upper_triangular(matrix, vector_b, use_errors=[]):
     lines = len(matrix)
+
+    linesV = len(vector_b)
+
+    if(linesV!=len(matrix[0])):
+        str_error = "A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas do vetor"
+        use_errors.append(str_error)
+        return [[], use_errors]
 
     result_x = [0 for i in range(lines)]
 
@@ -165,46 +180,28 @@ def solve_linear_systems_with_upper_triangular(matrix, vector_b):
 
         result_x[i] = ax_sum/float(matrix[i][i])
 
-    return result_x
+    return [result_x, use_errors]
 
 def get_submatrix(matrix, index):
-    sub_matrix = c.deepcopy(matrix)
+    secondary = c.deepcopy(matrix)
 
-    # Removendo primeira coluna
-    for i in range(len(sub_matrix)):
-        sub_matrix[i] = sub_matrix[i][1:]
+    for row in range(len(secondary)):
+        secondary[row] = secondary[row][1:]
 
-    # Removendo linha selecionada
-    sub_matrix = sub_matrix[:index] + sub_matrix[index+1:]
+    return secondary[:index] + secondary[index+1:]
 
-    return sub_matrix
-
-def laplace_determinant(matrix):
-    det = 0
-
-    lines = len(matrix)
-    columns = len(matrix[0])
-
-    if(not is_square_matrix(matrix)):
-        print("Erro! Essa matriz não é quadrada. Tente com outros parâmetros!")
-        return -1
-
-    if (columns == 1):
-        det = matrix[0][0]
-    else:
-        for k in range(lines):
-            det += matrix[k][0]*((-1)**k) * laplace_determinant(get_submatrix(matrix, k))
-    return det
-
-def is_symmetric(matrix):
+def is_symmetric(matrix, use_errors=[]):
+    
     if (not is_square_matrix(matrix)):
-        print("Essa matriz não é quadrada, tente com outro parâmetro")
-        return -1
+        str_error = "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
+        use_errors.append(str_error)
+        return [False, use_errors]
+
     for i in range(len(matrix)):
         for j in range(i):
             if matrix[i][j] != matrix[j][i]:
-                return False
-    return True
+                return [False, use_errors]
+    return [True, use_errors]
 
 def get_minor(matrix, order):
 
@@ -221,15 +218,20 @@ def get_minor(matrix, order):
 
     return column
 
-def sylvester_condition(matrix):
+def sylvester_condition(matrix, use_errors=[]):
     for i in range(len(matrix)):
         aux_matrix = get_minor(matrix, i)
-        if(laplace_determinant(aux_matrix) > 0):
-            return True
-    return False
+        det = laplace_determinant(aux_matrix)
 
-def is_positive_definite(matrix):
-    return sylvester_condition(matrix)
+        if(len(use_errors)>0):
+            return [False, use_errors]
+
+        if( det > 0):
+            return [True, use_errors]
+    return [False, use_errors]
+
+def is_positive_definite(matrix, use_errors=[]):
+    return [sylvester_condition(matrix), use_errors]
 
 def transposed_matrix(matrix):
     transposed = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
@@ -328,13 +330,18 @@ def inverse_auxiliar_function(matrix, i, j):
     return [row[:j] + row[j+1:] for row in (matrix[:i]+matrix[i+1:])]
 
 
-def inverse_matrix(matrix):
+def inverse_matrix(matrix, use_errors=[]):
     
     matrix_cofactors = []
     
-    value_determinant = laplace_determinant(matrix)
+    value_determinant = solver_jacobi(matrix, 0.00001)[3]
+
+    if(len(use_errors)>0):
+
+        return [0, use_errors]
+
     if(value_determinant == 0):
-        return 0
+        return [0, use_errors]
 
     for i in range(len(matrix)):
 
@@ -342,7 +349,8 @@ def inverse_matrix(matrix):
 
         for j in range(len(matrix)):
             minor = inverse_auxiliar_function(matrix, i, j)
-            line_cofactor.append(((-1)**(i+j)) * laplace_determinant(minor))
+            determinant = solver_jacobi(minor, 0.00001)[3]
+            line_cofactor.append(((-1)**(i+j)) * determinant)
 
         matrix_cofactors.append(line_cofactor)
 
@@ -353,7 +361,7 @@ def inverse_matrix(matrix):
 
             matrix_cofactors[i][j] = matrix_cofactors[i][j]/value_determinant
 
-    return matrix_cofactors
+    return [matrix_cofactors, use_errors]
 
 def calculate_matrix_p_regressao(values_x):
 
@@ -367,7 +375,11 @@ def calculate_matrix_p_regressao(values_x):
 
 def fatores_function(xi):
 
-    return [1, xi, xi**2]
+    "calculos feitos para cada"
+    "ex: a+bx+c**2 -> [1, x, x**2]"
+
+    #return [1, xi, xi**2]
+    return [1/(math.e**xi), math.log(xi)]
 
 def value_function(xi, coeficients):
 
@@ -375,6 +387,7 @@ def value_function(xi, coeficients):
 
     a=coeficients[0]
     b= coeficients[1]
-    c = coeficients[2]
+    #c = coeficients[2]
 
-    return a+b*xi+c*(xi**2)
+    #return a+b*x+c*(x**2)
+    return a*1/(math.e**xi)+b*math.log(xi)
