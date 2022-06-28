@@ -30,6 +30,32 @@ def multiply_matrix_vector(matrix, vector, use_errors=[]):
     return [result, use_errors]
 
 
+def sub_matrix_matrix(matrix1, matrix2):
+    lines = len(matrix1)
+    columns = len(matrix1[0])
+
+    result = []
+    for i in range(lines):
+        line=[]
+        for j in range(columns):
+            line.append(matrix1[i][j]-matrix2[i][j])
+        result.append(line)
+
+    return result
+
+def add_matrix_matrix(matrix1, matrix2):
+    lines = len(matrix1)
+    columns = len(matrix1[0])
+
+    result = []
+    for i in range(lines):
+        line=[]
+        for j in range(columns):
+            line.append(matrix1[i][j]+matrix2[i][j])
+        result.append(line)
+
+    return result
+
 def multiply_matrix_scalar(matrix,scalar):
 
     lines = len(matrix)
@@ -381,7 +407,7 @@ def fatores_function(xi):
     #return [1, xi, xi**2]
     return [1/(math.e**xi), math.log(xi)]
 
-def value_function(xi, coeficients):
+''' def value_function(xi, coeficients):
 
     #a+bx+cx**2
 
@@ -390,4 +416,34 @@ def value_function(xi, coeficients):
     #c = coeficients[2]
 
     #return a+b*x+c*(x**2)
-    return a*1/(math.e**xi)+b*math.log(xi)
+    return a*1/(math.e**xi)+b*math.log(xi) '''
+
+def calc_jacobiano(value_x):
+
+
+    [c2, c3, c4] = value_x
+
+    dF1_dxn = [2*c2, 4*c3, 12*c4]
+    
+    dF2_dxn = [12*c3*c2 + 36*c3*c4, \
+            24*c3**2 + 6*c2**2 + 36*c2*c4 + 108*c4**2, \
+            36*c2*c3 + 2*108*c3*c4]
+    
+    dF3_dx1 = 2*60*(c3**2)*c2 + 576*(c3**2)*c4 + 2*252*(c4**2)*c2 + 1296*(c4**3) + 3*24*(c2**2)*c4 + 3
+    dF3_dx2 = 4*60*c3**3 + 2*60*c3*c2**2 + 2*576*c2*c3*c4 + 2*2232*c3*c4**2
+    dF3_dx3 = 576*c2*c3**2 + 2*2232*(c3**2)*c4 + 2*252*c4*c2**2 + 3*1296*(c4**2)*c2 + 4*3348*c4**3 + 24*(c2**3)
+
+    dF3_dxn = [dF3_dx1, dF3_dx2, dF3_dx3]
+
+    return [dF1_dxn, dF2_dxn, dF3_dxn]
+
+def value_function(value_x, phi_1, phi_2):
+
+    function_1 = 2*value_x[1]**2 + value_x[0]**2 + 6*value_x[2]**2 - 1
+
+    function_2 = 8*value_x[1]**2 + 6*value_x[1]*value_x[0]**2 + 36*value_x[1]*value_x[0]*value_x[2] + 108*value_x[1]*value_x[2]**2 - phi_1
+    
+    function_3 = 60*value_x[1]**4 + 60*(value_x[1]**2)*(value_x[0]**2) + 576*(value_x[1]**2)*value_x[0]*value_x[2] + 2232*(value_x[1]**2)*(value_x[2]**2) + 252*(value_x[2]**2)*(value_x[0]**2) + 1296*(value_x[2]**3)*value_x[0] \
+        + 3348*value_x[2]**4 + 24*(value_x[0]**3)*value_x[2] + 3*value_x[0] - phi_2
+    
+    return [function_1, function_2, function_3]
