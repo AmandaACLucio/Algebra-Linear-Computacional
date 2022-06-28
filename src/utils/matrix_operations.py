@@ -3,18 +3,42 @@ from re import T
 import copy as c
 import math
 
+from matplotlib.style import use
+
 def is_square_matrix(matrix):
     # Verificando se a matriz é quadrada e se tem o mesmo número de elementos em todas as linhas
     if any(len(i) != len(matrix) for i in matrix):
         return False
     return True
 
+#transpor vetor
+def transpose_vector(vector):
+    return [[vector[i]] for i in range(len(vector))]
+
+def multiply_vector_matrix(vector, matrix, use_errors=[]):
+    columnsM = len(matrix[0])
+    colunsV = len(vector)
+    result = [0 for x in range(columnsM)]
+
+    if(colunsV!=len(matrix)):
+        str_error = "A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas do vetor"
+        use_errors.append(str_error)
+        return [result, use_errors]
+
+    for j in range(columnsM):
+        sum = 0
+        for i in range(colunsV):
+            sum+=matrix[i][j]*vector[i]
+        result[j]=sum
+
+    return [result, use_errors]
+
 def multiply_matrix_vector(matrix, vector, use_errors=[]):
 
     linesM = len(matrix)
     columnsM = len(matrix[0])
     linesV = len(vector)
-    result = [0*x for x in range(linesM)]
+    result = [0 for i in range(linesM)]
 
     if(linesV!=len(matrix[0])):
         str_error = "A matriz 1 precisa ter o mesmo número de colunas que a quantidade de linhas do vetor"
@@ -244,6 +268,24 @@ def get_minor(matrix, order):
 
     return column
 
+def laplace_determinant(matrix, use_errors=[]):
+    if (not is_square_matrix(matrix)):
+        str_error = "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
+        use_errors.append(str_error)
+        return [False, use_errors]
+
+    if (len(matrix) == 1):
+        return [matrix[0][0], use_errors]
+
+    if (len(matrix) == 2):
+        return [matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0], use_errors]
+
+    determinant = 0
+    for i in range(len(matrix)):
+        value_current_det = laplace_determinant(get_minor(matrix, i), use_errors)
+        determinant += (-1)**i*matrix[0][i]*value_current_det[0]
+    return [determinant, use_errors]
+
 def sylvester_condition(matrix, use_errors=[]):
     for i in range(len(matrix)):
         aux_matrix = get_minor(matrix, i)
@@ -355,39 +397,61 @@ def calculate_matrix_p_jacobiano(matrix, index):
 def inverse_auxiliar_function(matrix, i, j):
     return [row[:j] + row[j+1:] for row in (matrix[:i]+matrix[i+1:])]
 
+def inverse_matrix(matrix):
+    
+    cofactors = []
+    use_errors = []
+    determinant = laplace_determinant(matrix)[0]
+    if(determinant == 0):
+        return [0, use_errors]
+
+    for r in range(len(matrix)):
+        cofactorRow = []
+
+        for c in range(len(matrix)):
+            minor = inverse_auxiliar_function(matrix, r, c)
+            cofactorRow.append(((-1)**(r+c))*laplace_determinant(minor)[0])
+
+        cofactors.append(cofactorRow)
+
+    cofactors = transposed_matrix(cofactors)
+
+
+    for r in range(len(cofactors)):
+        for c in range(len(cofactors)):
+
+            cofactors[r][c] = cofactors[r][c]/determinant
+
+    return [cofactors, use_errors]
+'''
 
 def inverse_matrix(matrix, use_errors=[]):
-    
-    matrix_cofactors = []
-    
-    value_determinant = solver_jacobi(matrix, 0.00001)[3]
+    if (not is_square_matrix(matrix)):
+        str_error = "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
+        use_errors.append(str_error)
+        return [False, use_errors]
 
-    if(len(use_errors)>0):
+    if (len(matrix) == 1):
+        return [matrix[0][0], use_errors]
 
-        return [0, use_errors]
+    if (len(matrix) == 2):
+        return [matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0], use_errors]
 
-    if(value_determinant == 0):
-        return [0, use_errors]
+    determinant = laplace_determinant(matrix)[0]
+
+    if(determinant == 0):
+        str_error = "Erro! O determinante da matriz é 0. Tente com outros parâmetros!"
+        use_errors.append(str_error)
+        return [-1, use_errors]
+
+    inverse = [[float(0) for j in range(len(matrix))] for i in range(len(matrix))]
 
     for i in range(len(matrix)):
-
-        line_cofactor = []
-
         for j in range(len(matrix)):
-            minor = inverse_auxiliar_function(matrix, i, j)
-            determinant = solver_jacobi(minor, 0.00001)[3]
-            line_cofactor.append(((-1)**(i+j)) * determinant)
+            inverse[i][j] = (1/determinant)*(laplace_determinant(get_submatrix(matrix, j))*calculate_matrix_p_jacobiano(matrix, [i, j]))[0]
 
-        matrix_cofactors.append(line_cofactor)
-
-    matrix_cofactors = transposed_matrix(matrix_cofactors)
-
-    for i in range(len(matrix_cofactors)):
-        for j in range(len(matrix_cofactors)):
-
-            matrix_cofactors[i][j] = matrix_cofactors[i][j]/value_determinant
-
-    return [matrix_cofactors, use_errors]
+    return [inverse, use_errors]
+'''
 
 def calculate_matrix_p_regressao(values_x):
 
@@ -420,7 +484,6 @@ def fatores_function(xi):
 
 def calc_jacobiano(value_x):
 
-
     [c2, c3, c4] = value_x
 
     dF1_dxn = [2*c2, 4*c3, 12*c4]
@@ -437,8 +500,10 @@ def calc_jacobiano(value_x):
 
     return [dF1_dxn, dF2_dxn, dF3_dxn]
 
+
 def value_function(value_x, phi_1, phi_2):
 
+    '''
     function_1 = 2*value_x[1]**2 + value_x[0]**2 + 6*value_x[2]**2 - 1
 
     function_2 = 8*value_x[1]**2 + 6*value_x[1]*value_x[0]**2 + 36*value_x[1]*value_x[0]*value_x[2] + 108*value_x[1]*value_x[2]**2 - phi_1
@@ -446,4 +511,8 @@ def value_function(value_x, phi_1, phi_2):
     function_3 = 60*value_x[1]**4 + 60*(value_x[1]**2)*(value_x[0]**2) + 576*(value_x[1]**2)*value_x[0]*value_x[2] + 2232*(value_x[1]**2)*(value_x[2]**2) + 252*(value_x[2]**2)*(value_x[0]**2) + 1296*(value_x[2]**3)*value_x[0] \
         + 3348*value_x[2]**4 + 24*(value_x[0]**3)*value_x[2] + 3*value_x[0] - phi_2
     
-    return [function_1, function_2, function_3]
+    return [function_1, function_2, function_3]'''
+
+    x1= value_x[0]
+    x2= value_x[1]
+    return [x1+2*x2-2-phi_1, x1**2 + 4*(x2**2)-4-phi_2]	

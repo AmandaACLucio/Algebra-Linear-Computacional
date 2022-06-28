@@ -1,7 +1,7 @@
-from typing import OrderedDict
 from src.task_1.class_task1 import task_1
 from src.task_2.class_task2 import task_2
 from src.task_3.class_task3 import task_3
+from src.task_4.class_task4 import task_4
 from src.utils.files_operations import read_matrix_file, read_vector_file, read_json_file, read_pairs_file
 
 def main(task):
@@ -30,6 +30,12 @@ def main(task):
         [values_x, values_y] = read_pairs_file(load_config["Path_Pairs"])
 
         task_object= task_3(load_config["ICOD"], load_config["Number_pairs_points"], load_config["xi"], values_x, values_y)
+
+        task_object.run()
+
+    elif(task==4):
+
+        task_object= task_4(load_config["ICOD"], load_config["theta1"], load_config["theta2"], load_config["TOLm"])
 
         task_object.run()
 
