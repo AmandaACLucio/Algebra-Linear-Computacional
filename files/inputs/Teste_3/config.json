@@ -1,11 +1,11 @@
 ﻿{
-    "OrdemN":1,
-    "ICOD":2,
-    "IDET":0,
-    "Path_Matrix_A":"..\\..\\files\\inputs\\mat_A_02.dat",
-    "Path_Vector_B":"..\\..\\files\\inputs\\vet_B_02.dat",
-    "Path_Pairs":"..\\..\\files\\inputs\\pairs.dat",
-    "TOLm":1,
-    "Number_pairs_points":"",
-    "xi":1
+    "OrdemN": 1,
+    "ICOD": 1,
+    "IDET": 0,
+    "Path_Matrix_A": "..\\..\\files\\inputs\\mat_A_02.dat",
+    "Path_Vector_B": "..\\..\\files\\inputs\\vet_B_02.dat",
+    "Path_Pairs": "..\\..\\files\\inputs\\pairs.dat",
+    "TOLm": 1,
+    "Number_pairs_points": "",
+    "xi": 1
 }
