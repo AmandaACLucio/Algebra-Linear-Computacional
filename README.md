@@ -3,13 +3,14 @@
 Projeto realizado em python3 por Amanda Lucio e Nayara Gomes.
 
 ## Table of Contents:
+
 - [Estrutura do projeto](#Estrutura)
 - [Como usar](#Como-usar)
 - [Como rodar](#Como-Rodar)
 
 ## Estrutura do projeto
 
-O projeto foi estrutura visando a construção de uma pasta com programa reutilizádos por todas as tasks, dimunuindo a má prática de repetir trechos de código.
+O projeto foi estrutura visando a construção de uma pasta com programa reutilizados por todas as tasks, evitando a repetição de código.
 
 ```
 C:.
@@ -25,7 +26,7 @@ C:.
     ├───task_3
     │
     └───utils
-    
+
 ```
 
 ## Como usar
@@ -46,3 +47,6 @@ Desta forma, basta digitar o número da task correspondente:
 - [Task1](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_1)
 - [Task2](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_2)
 - [Task3](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_3)
+- [Task4](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_4)
+- [Task5](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_5)
+- [Task6](https://github.com/AmandaACLucio/Algebra-Linear-Computacional/tree/master/src/task_6)
