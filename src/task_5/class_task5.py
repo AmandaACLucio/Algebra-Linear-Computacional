@@ -3,7 +3,7 @@ from src.task_5.item_1.bissection_method import bissection_method
 from src.task_5.item_1.newton_method import newton_method
 from src.task_5.item_3.derivative import backward_step, central_difference, forward_step
 from src.task_5.item_2.integral_defined import solve_integral_defined
-from src.task_5.item_4.Richard_extrapolation import solve_derivative_richard
+from src.task_5.item_4.derivative_richard import solve_derivative_richard
 
 from src.utils.files_operations import write_output_file
 
