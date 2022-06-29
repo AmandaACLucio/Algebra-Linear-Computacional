@@ -42,5 +42,12 @@ class task_5:
 
                 content['solution'] = values_c
                 content['useErrors'] = use_errors
+            elif(self.ICOD == 2):
+                print("Integral")
+
+            elif(self.ICOD == 3):
+                print("Derivada DF")
+            elif(self.ICOD == 4):
+                print("Derivada RE")
 
             write_output_file(content)
