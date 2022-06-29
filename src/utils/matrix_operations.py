@@ -521,30 +521,32 @@ def fatores_function(xi):
 
 def calc_jacobiano(value_x):
 
-    # [c2, c3, c4] = value_x
+    [c2, c3, c4] = value_x
 
-    # dF1_dxn = [2*c2, 4*c3, 12*c4]
+    dF1_dxn = [2*c2, 4*c3, 12*c4]
 
-    # dF2_dxn = [12*c3*c2 + 36*c3*c4,
-    #            24*c3**2 + 6*c2**2 + 36*c2*c4 + 108*c4**2,
-    #            36*c2*c3 + 2*108*c3*c4]
+    dF2_dxn = [12*c3*c2 + 36*c3*c4,
+               24*c3**2 + 6*c2**2 + 36*c2*c4 + 108*c4**2,
+               36*c2*c3 + 2*108*c3*c4]
 
-    # dF3_dx1 = 2*60*(c3**2)*c2 + 576*(c3**2)*c4 + 2*252 * \
-    #     (c4**2)*c2 + 1296*(c4**3) + 3*24*(c2**2)*c4 + 3
-    # dF3_dx2 = 4*60*c3**3 + 2*60*c3*c2**2 + 2*576*c2*c3*c4 + 2*2232*c3*c4**2
-    # dF3_dx3 = 576*c2*c3**2 + 2*2232 * \
-    #     (c3**2)*c4 + 2*252*c4*c2**2 + 3*1296 * \
-    #     (c4**2)*c2 + 4*3348*c4**3 + 24*(c2**3)
+    dF3_dx1 = 2*60*(c3**2)*c2 + 576*(c3**2)*c4 + 2*252 * \
+        (c4**2)*c2 + 1296*(c4**3) + 3*24*(c2**2)*c4 + 3
+    dF3_dx2 = 4*60*c3**3 + 2*60*c3*c2**2 + 2*576*c2*c3*c4 + 2*2232*c3*c4**2
+    dF3_dx3 = 576*c2*c3**2 + 2*2232 * \
+        (c3**2)*c4 + 2*252*c4*c2**2 + 3*1296 * \
+        (c4**2)*c2 + 4*3348*c4**3 + 24*(c2**3)
 
-    # dF3_dxn = [dF3_dx1, dF3_dx2, dF3_dx3]
+    dF3_dxn = [dF3_dx1, dF3_dx2, dF3_dx3]
 
-    # return [dF1_dxn, dF2_dxn, dF3_dxn]
+    return [dF1_dxn, dF2_dxn, dF3_dxn]
+    '''
     print(value_x)
     return [[1, 2], [2*value_x[0], 8*value_x[1]]]
+    '''
 
 
 def value_function(value_x, phi_1, phi_2):
-    '''function_1 = 2*value_x[1]**2 + value_x[0]**2 + 6*value_x[2]**2 - 1
+    function_1 = 2*value_x[1]**2 + value_x[0]**2 + 6*value_x[2]**2 - 1
 
     function_2 = 8*value_x[1]**2 + 6*value_x[1]*value_x[0]**2 + 36 * \
         value_x[1]*value_x[0]*value_x[2] + 108*value_x[1]*value_x[2]**2 - phi_1
@@ -559,3 +561,4 @@ def value_function(value_x, phi_1, phi_2):
     x1 = value_x[0]
     x2 = value_x[1]
     return [x1+2*x2-2, x1**2 + 4*(x2**2)-4]
+    '''

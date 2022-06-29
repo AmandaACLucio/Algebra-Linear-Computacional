@@ -6,8 +6,7 @@ TOL = 10**(-4)
 
 
 def newton_method_nl(theta1, theta2):
-    # x = [1, 0, 0]
-    x = [2, 3]
+    x = [1, 0, 0]
 
     equations = value_function(x, theta1, theta2)
 
