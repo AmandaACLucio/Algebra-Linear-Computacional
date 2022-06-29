@@ -21,3 +21,4 @@ def bissection_method(consts, a, b, TOL=0):
             a = c
 
     print("Raiz: " + str(c))
+    return c

@@ -568,3 +568,9 @@ def function_task5(consts, x):
     [c1, c2, c3, c4] = consts
     return c1*math.exp(c2*x) + c3*x**c4
     # return x**2 - 4*math.cos(x)
+
+
+def get_derivative_task5(consts, x):
+    [c1, c2, c3, c4] = consts
+    return c1*c2*math.exp(c2*x) + c3*c4*x**(c4-1)
+    # return 2*x + 4*math.sin(x)
