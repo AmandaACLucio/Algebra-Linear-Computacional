@@ -2,7 +2,6 @@ from src.task_5.item_1.bissection_method import bissection_method
 from src.task_5.item_1.newton_method import newton_method
 
 from src.utils.files_operations import write_output_file
-from src.utils.matrix_operations import function_task5
 
 
 class task_5:
@@ -25,16 +24,17 @@ class task_5:
             if(self.ICOD == 1):
                 [values_c, use_errors] = [0, 0]
                 print("Raiz")
-
+                # Defina aqui os valores do intervalo a ser utilizado
+                a = 1
+                b = 10
                 method = input(
                     'Escolha o método desejado: \n 1 - Bisseção,\n 2 - Newton \n')
                 if(method == '1'):
-                    a = 0
-                    b = 10
+
                     [values_c, use_errors] = [
                         bissection_method(self.consts, a, b, self.TOL_m), 0]
                 elif(method == '2'):
-                    x = 10
+                    x = a+b/2.0
                     [values_c, use_errors] = [
                         newton_method(self.consts, x, self.TOL_m), 0]
                 else:

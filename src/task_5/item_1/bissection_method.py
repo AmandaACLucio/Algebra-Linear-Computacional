@@ -6,9 +6,9 @@ def bissection_method(consts, a, b, TOL=0):
     if function_task5(consts, a)*function_task5(consts, b) > 0:
         print("Erro! Não é possível afirmar se o intervalo contém raiz")
         return
-
     c = a
-    while(math.fabs(b - a) >= TOL):
+    function_i = function_task5(consts, c)
+    while(math.fabs(function_i) >= TOL):
 
         c = (a+b)/2.0
         function_i = function_task5(consts, c)
@@ -19,6 +19,5 @@ def bissection_method(consts, a, b, TOL=0):
             b = c
         else:
             a = c
-
     print("Raiz: " + str(c))
     return c
