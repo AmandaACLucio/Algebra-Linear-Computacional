@@ -504,14 +504,14 @@ def calc_jacobiano(value_x):
     return [dF1_dxn, dF2_dxn, dF3_dxn]
 
 
-def value_function(value_x, phi_1, phi_2):
+def value_function(value_x, theta_1, theta_2):
 
     function_1 = 2*value_x[1]**2 + value_x[0]**2 + 6*value_x[2]**2 - 1
 
-    function_2 = 8*value_x[1]**2 + 6*value_x[1]*value_x[0]**2 + 36*value_x[1]*value_x[0]*value_x[2] + 108*value_x[1]*value_x[2]**2 - phi_1
+    function_2 = 8*value_x[1]**2 + 6*value_x[1]*value_x[0]**2 + 36*value_x[1]*value_x[0]*value_x[2] + 108*value_x[1]*value_x[2]**2 - theta_1
     
     function_3 = 60*value_x[1]**4 + 60*(value_x[1]**2)*(value_x[0]**2) + 576*(value_x[1]**2)*value_x[0]*value_x[2] + 2232*(value_x[1]**2)*(value_x[2]**2) + 252*(value_x[2]**2)*(value_x[0]**2) + 1296*(value_x[2]**3)*value_x[0] \
-        + 3348*value_x[2]**4 + 24*(value_x[0]**3)*value_x[2] + 3*value_x[0] - phi_2
+        + 3348*value_x[2]**4 + 24*(value_x[0]**3)*value_x[2] + 3*value_x[0] - theta_2
     
     return [function_1, function_2, function_3]
 
