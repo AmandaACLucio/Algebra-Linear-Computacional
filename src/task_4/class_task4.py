@@ -26,7 +26,7 @@ class task_4:
             if(self.ICOD == 1):
                 print("Newton Method")
                 [values_c, use_errors] = [
-                    newton_method_nl(self.theta1, self.theta2), 0]
+                    newton_method_nl(self.theta1, self.theta2, self.TOL_m), 0]
                 content['values_c'] = values_c
                 content['useErrors'] = use_errors
 

@@ -562,3 +562,9 @@ def value_function(value_x, phi_1, phi_2):
     x2 = value_x[1]
     return [x1+2*x2-2, x1**2 + 4*(x2**2)-4]
     '''
+
+
+def function_task5(consts, x):
+    [c1, c2, c3, c4] = consts
+    return c1*math.exp(c2*x) + c3*x**c4
+    # return x**2 - 4*math.cos(x)

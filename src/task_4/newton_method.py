@@ -2,10 +2,9 @@ import math
 from src.utils.matrix_operations import calc_jacobiano, inverse_matrix, multiply_matrix_vector, add_vector_vector, multiply_vector_scalar, norm_vector, value_function
 
 STEPS = 1000
-TOL = 10**(-4)
 
 
-def newton_method_nl(theta1, theta2):
+def newton_method_nl(theta1, theta2, tol=0):
     x = [1, 0, 0]
 
     equations = value_function(x, theta1, theta2)
@@ -24,7 +23,7 @@ def newton_method_nl(theta1, theta2):
 
         residue = norm_vector(delta_x)/norm_vector(x)
 
-        if (residue < TOL):
+        if (residue < tol):
             print("Solução pelo método de Newton: " + str(x))
             return x
 
