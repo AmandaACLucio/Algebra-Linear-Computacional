@@ -7,14 +7,14 @@
     "Path_Pairs":"..\\..\\files\\inputs\\pairs.dat",
     "Number_pairs_points":3,
     "xi":1,
+    "IDET":1,
 
 
     "_coment2_":"PARTE 2",
 
     "ICOD":2,
-    "IDET":1,
     "theta1":0,
-    "theta2":0,
+    "theta2":11.667,
     "TOLm":0.0001
 
 }

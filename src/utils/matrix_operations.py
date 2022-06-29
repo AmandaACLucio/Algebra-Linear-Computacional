@@ -268,7 +268,10 @@ def get_minor(matrix, order):
 
     return column
 
-def laplace_determinant(matrix, use_errors=[]):
+def laplace_determinant(matrix, use_errors = []):
+
+    result = 0
+
     if (not is_square_matrix(matrix)):
         str_error = "Erro! Essa matriz não é quadrada. Tente com outros parâmetros!"
         use_errors.append(str_error)
@@ -276,15 +279,16 @@ def laplace_determinant(matrix, use_errors=[]):
 
     if (len(matrix) == 1):
         return [matrix[0][0], use_errors]
-
+    
     if (len(matrix) == 2):
         return [matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0], use_errors]
 
-    determinant = 0
     for i in range(len(matrix)):
-        value_current_det = laplace_determinant(get_minor(matrix, i), use_errors)
-        determinant += (-1)**i*matrix[0][i]*value_current_det[0]
-    return [determinant, use_errors]
+        get_submatrix_matrix = get_submatrix(matrix, i)
+        value_current_det = laplace_determinant(get_submatrix_matrix, use_errors)
+        result += (-1)**i*matrix[0][i]*value_current_det[0]
+    return [result, use_errors]
+
 
 def sylvester_condition(matrix, use_errors=[]):
     for i in range(len(matrix)):
@@ -416,7 +420,6 @@ def inverse_matrix(matrix):
 
     cofactors = transposed_matrix(cofactors)
 
-
     for r in range(len(cofactors)):
         for c in range(len(cofactors)):
 
@@ -503,7 +506,6 @@ def calc_jacobiano(value_x):
 
 def value_function(value_x, phi_1, phi_2):
 
-    '''
     function_1 = 2*value_x[1]**2 + value_x[0]**2 + 6*value_x[2]**2 - 1
 
     function_2 = 8*value_x[1]**2 + 6*value_x[1]*value_x[0]**2 + 36*value_x[1]*value_x[0]*value_x[2] + 108*value_x[1]*value_x[2]**2 - phi_1
@@ -511,8 +513,8 @@ def value_function(value_x, phi_1, phi_2):
     function_3 = 60*value_x[1]**4 + 60*(value_x[1]**2)*(value_x[0]**2) + 576*(value_x[1]**2)*value_x[0]*value_x[2] + 2232*(value_x[1]**2)*(value_x[2]**2) + 252*(value_x[2]**2)*(value_x[0]**2) + 1296*(value_x[2]**3)*value_x[0] \
         + 3348*value_x[2]**4 + 24*(value_x[0]**3)*value_x[2] + 3*value_x[0] - phi_2
     
-    return [function_1, function_2, function_3]'''
+    return [function_1, function_2, function_3]
 
-    x1= value_x[0]
+    '''x1= value_x[0]
     x2= value_x[1]
-    return [x1+2*x2-2-phi_1, x1**2 + 4*(x2**2)-4-phi_2]	
+    return [x1+2*x2-2-phi_1, x1**2 + 4*(x2**2)-4-phi_2]'''
