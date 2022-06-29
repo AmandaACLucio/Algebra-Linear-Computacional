@@ -22,8 +22,7 @@ class task_6:
 
         print("Integral Definida")
 
-        [solution, use_errors] = solve_runge_kutta_nystron(
-            self.point_a, self.point_b, self.count_points_integration, self.method_integral_defined)
+        [solution, use_errors] = solve_runge_kutta_nystron(self.integration_step, self.integration_time, self.value_m, self.value_c, self.value_k, self.list_a, self.list_w)
 
         content['path_solution_csv'] = solution
         content['useErrors'] = use_errors

@@ -582,6 +582,6 @@ def function_task6(t, list_a, list_w):
     result = a1*math.sin(w1*t) + a2*math.sin(w2*t) + a3*math.cos(w3*t)
     return result
 
-def derivative_function_task6(t, x, dx, value_c, value_m, value_k):
+def derivative_function_task6(time, displacement, velocity, value_c, value_m, value_k, list_a, list_w):
     
-    return (function_task6(t)-value_c*dx-value_k*x)/value_m
+    return (function_task6(time, list_a, list_w)-value_c*velocity-value_k*displacement)/value_m

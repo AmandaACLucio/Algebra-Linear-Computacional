@@ -1,4 +1,7 @@
 {
-    "solution": 3.5393966119380647,
-    "useErrors": 0
+    "solution": [],
+    "useErrors": [
+        "Insira um valor de tempo de integra\u00e7\u00e3o diferente de 0"
+    ],
+    "path_solution_csv": -1
 }
