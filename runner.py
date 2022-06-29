@@ -3,6 +3,7 @@ from src.task_2.class_task2 import task_2
 from src.task_3.class_task3 import task_3
 from src.task_4.class_task4 import task_4
 from src.task_5.class_task5 import task_5
+from src.task_6.class_task6 import task_6
 
 from src.utils.files_operations import read_matrix_file, read_vector_file, read_json_file, read_pairs_file
 
@@ -50,6 +51,12 @@ def main(task):
 
         task_object = task_5(
             load_config["ICOD"], load_config["c1"], load_config["c2"], load_config["c3"], load_config["c4"], load_config["a"], load_config["b"], load_config["delta_x"], load_config["TOLm"], load_config["count_points_integration"], load_config["point_a"], load_config["point_b"], load_config["method_defined_integral"], load_config["point_richard"], load_config["value_delta_x1"], load_config["value_delta_x2"])
+
+        task_object.run()
+
+    elif(task == 6):
+
+        task_object = task_6(load_config["integration_step"], load_config["integration_time"], load_config["value_m"], load_config["value_c"], load_config["value_k"], load_config["list_a"], load_config["list_w"])
 
         task_object.run()
 

@@ -573,3 +573,15 @@ def get_derivative_task5(consts, x):
     [c1, c2, c3, c4] = consts
     return c1*c2*math.exp(c2*x) + c3*c4*x**(c4-1)
     # return 2*x + 4*math.sin(x)
+
+def function_task6(t, list_a, list_w):
+
+    [a1, a2, a3] = list_a
+    [w1, w2, w3] = list_w
+
+    result = a1*math.sin(w1*t) + a2*math.sin(w2*t) + a3*math.cos(w3*t)
+    return result
+
+def derivative_function_task6(t, x, dx, value_c, value_m, value_k):
+    
+    return (function_task6(t)-value_c*dx-value_k*x)/value_m
