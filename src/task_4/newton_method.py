@@ -1,26 +1,26 @@
 import math
-from src.utils.matrix_operations import calc_jacobiano, inverse_matrix, multiply_matrix_vector, add_vector_vector, norm_vector, get_vector_f, value_function
+from src.utils.matrix_operations import calc_jacobiano, inverse_matrix, multiply_matrix_vector, add_vector_vector, multiply_vector_scalar, norm_vector, value_function
 
 STEPS = 1000
-TOL = 10**-4
+TOL = 10**(-4)
 
 
 def newton_method_nl(theta1, theta2):
-    x = [1, 0, 0]
+    # x = [1, 0, 0]
+    x = [2, 3]
 
     equations = value_function(x, theta1, theta2)
 
     for _ in range(STEPS):
         jacobian_inverse = inverse_matrix(
-            calc_jacobiano(equations, x))
-        vector_f = get_vector_f(equations, x)
-
+            calc_jacobiano(x))
+        vector_f = value_function(x, theta1, theta2)
         if(jacobian_inverse == 0):
             print("Erro! A inversa do Jacobiano não pode ser nula")
             break
 
-        delta_x = multiply_matrix_vector(jacobian_inverse, vector_f)
-        delta_x = [x*(-1) for x in delta_x]
+        delta_x = multiply_matrix_vector(jacobian_inverse[0], vector_f)
+        delta_x = multiply_vector_scalar(delta_x[0], -1)
         x = add_vector_vector(x, delta_x)
 
         residue = norm_vector(delta_x)/norm_vector(x)
