@@ -4,13 +4,8 @@ from src.task_5.item_2.gauss_square import gauss_legendre
 from src.task_5.item_2.polynomial_square import polynomial_quadrature
 
 
-def solve_integral_defined(user_errors=[]):
+def solve_integral_defined(point_a, point_b, count_points_integration, method, user_errors=[]):
 
-    point_a = float(input('point_a: '))
-    point_b = float(input('point_b: '))
-    count_points_integration = int(input('Quantos pontos de integração deseja utilizar? '))
-
-    method = int(input('Qual o método escolhido:\n 1: Gauss-Legendre\n 2: Polinomial: '))
     result=[]
 
     if method == 1:
