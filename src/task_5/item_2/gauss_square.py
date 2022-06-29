@@ -1,5 +1,5 @@
 from src.task_5.item_2.utils.gauss_dict import dict_gauss_quadrature, select_quadrature
-from src.utils.matrix_operations import value_function
+from src.utils.matrix_operations import function_task5
 
 def gauss_legendre(count_points_integration, point_a, point_b):
 
@@ -8,5 +8,5 @@ def gauss_legendre(count_points_integration, point_a, point_b):
 
     points = map(lambda point: 0.5*(point_a + point_b + point*L), quadrature.get('points'))
 
-    sum_weights = sum([value_function(point) * weight for point, weight in zip(points, quadrature['weights'])])
+    sum_weights = sum([function_task5(point) * weight for point, weight in zip(points, quadrature['weights'])])
     return (L/2)*sum_weights
