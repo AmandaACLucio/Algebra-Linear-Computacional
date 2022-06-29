@@ -67,18 +67,6 @@ class task_5:
                 content['solution'] = solution
                 content['useErrors'] = use_errors
 
-            elif(self.ICOD == 4):
-
-                print("Derivada pelo método de Richard")
-
-                [solution, use_errors] = solve_integral_defined(
-                    self.point_richard, self.value_delta_x1, self.value_delta_x2)
-
-                content['solution'] = solution
-                content['useErrors'] = use_errors
-            elif(self.ICOD == 2):
-                print("Integral")
-
             elif(self.ICOD == 3):
                 print("Derivada DF")
                 method = input(
@@ -100,7 +88,16 @@ class task_5:
 
                 content['solution'] = values_c
                 content['useErrors'] = use_errors
+
+
             elif(self.ICOD == 4):
-                print("Derivada RE")
+
+                print("Derivada pelo método de Richard")
+
+                [solution, use_errors] = solve_integral_defined(
+                    self.point_richard, self.value_delta_x1, self.value_delta_x2)
+
+                content['solution'] = solution
+                content['useErrors'] = use_errors
 
             write_output_file(content)
