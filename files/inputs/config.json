@@ -18,5 +18,14 @@
     "c4": -10,
     "a": 1,
     "b": 10,
-    "delta_x": 0.1
+    "delta_x": 0.1,
+    "_coment3_": "task 2 - item 1",
+    "method_defined_integral": 1,
+    "point_a": 0,
+    "point_b": 0,
+    "count_points_integration": 10,
+    "_coment4_": "task 2 - item 2",
+    "point_richard": 0,
+    "value_delta_x1": 0,
+    "value_delta_x2": 0
 }
