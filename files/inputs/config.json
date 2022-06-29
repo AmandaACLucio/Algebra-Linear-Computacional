@@ -1,4 +1,5 @@
 ﻿{
+<<<<<<< HEAD
     "_coment1_": "PARTE 1",
     "OrdemN": 14,
     "Path_Matrix_A": "..\\..\\files\\inputs\\mat_A_02.dat",
@@ -12,4 +13,24 @@
     "theta1": 0,
     "theta2": 3,
     "TOLm": 0.0001
+=======
+    "_coment1_":"PARTE 1",
+
+    "OrdemN":14,
+    "Path_Matrix_A":"..\\..\\files\\inputs\\mat_A_02.dat",
+    "Path_Vector_B":"..\\..\\files\\inputs\\vet_B_02.dat",
+    "Path_Pairs":"..\\..\\files\\inputs\\pairs.dat",
+    "Number_pairs_points":3,
+    "xi":1,
+    "IDET":1,
+
+
+    "_coment2_":"PARTE 2",
+
+    "ICOD":2,
+    "theta1":0,
+    "theta2":11.667,
+    "TOLm":0.0001
+
+>>>>>>> f81937a2ff1f01ec3250233468541dcb31266fc2
 }

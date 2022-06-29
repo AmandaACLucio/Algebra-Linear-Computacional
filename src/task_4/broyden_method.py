@@ -5,11 +5,11 @@ from src.utils.matrix_operations import  add_vector_vector, multiply_matrix_scal
 
 def broyden_method(phi_1, phi_2, max_tolerance=0, n_iterations=1000):
 
-    #Bk_previous = [[int(i==j) for i in range(2)] for j in range(2)]
-    Bk_previous = [[1, 2], [4, 24]]
+    Bk_previous = [[int(i==j) for i in range(3)] for j in range(3)]
+    #Bk_previous = [[1, 2], [4, 24]]
 
     use_errors = []
-    vector_x = [2, 3]
+    vector_x = [1, 0, 0]
     value_function_vector=[]
 
     for i in range(1, n_iterations):
