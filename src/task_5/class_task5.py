@@ -94,7 +94,7 @@ class task_5:
 
                 print("Derivada pelo método de Richard")
 
-                [solution, use_errors] = solve_integral_defined(
+                [solution, use_errors] = solve_derivative_richard(
                     self.point_richard, self.value_delta_x1, self.value_delta_x2)
 
                 content['solution'] = solution

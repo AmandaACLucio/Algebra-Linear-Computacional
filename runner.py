@@ -49,7 +49,7 @@ def main(task):
     elif(task == 5):
 
         task_object = task_5(
-            load_config["ICOD"], load_config["c1"], load_config["c2"], load_config["c3"], load_config["c4"], load_config["a"], load_config["b"], load_config["delta_x"], load_config["TOLm"])
+            load_config["ICOD"], load_config["c1"], load_config["c2"], load_config["c3"], load_config["c4"], load_config["a"], load_config["b"], load_config["delta_x"], load_config["TOLm"], load_config["count_points_integration"], load_config["point_a"], load_config["point_b"], load_config["method_defined_integral"], load_config["point_richard"], load_config["value_delta_x1"], load_config["value_delta_x2"])
 
         task_object.run()
 
