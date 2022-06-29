@@ -10,7 +10,7 @@ from src.utils.files_operations import write_output_file
 
 class task_5:
 
-    def __init__(self, ICOD, c1, c2, c3, c4, a, b, delta_x, TOL_m, count_points_integration, point_a, point_b, / method_integral_defined, point_richard, value_delta_x1, value_delta_x2):
+    def __init__(self, ICOD, c1, c2, c3, c4, a, b, delta_x, TOL_m, count_points_integration, point_a, point_b, method_integral_defined, point_richard, value_delta_x1, value_delta_x2):
 
         self.ICOD = ICOD
         self.consts = [c1, c2, c3, c4]
