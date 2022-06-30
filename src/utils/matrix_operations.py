@@ -3,8 +3,6 @@ from re import T
 import copy as c
 import math
 
-from matplotlib.style import use
-
 
 def is_square_matrix(matrix):
     # Verificando se a matriz é quadrada e se tem o mesmo número de elementos em todas as linhas
@@ -569,7 +567,8 @@ def value_function(value_x, theta_1, theta_2):
 def function_task5(consts, x):
     [c1, c2, c3, c4] = consts
     return c1*math.exp(c2*x) + c3*x**c4
-    # return x**2 - 4*math.cos(x)
+    #return x**2 - 4*math.cos(x)
+    #return math.exp((-x)**2)
 
 
 def get_derivative_task5(consts, x):

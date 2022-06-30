@@ -1,5 +1,5 @@
 ﻿
-def select_polynomial_quadrature(point_a, point_b, count_points_integration):
+def select_polynomial_quadrature(count_points_integration, point_a, point_b):
     L = point_b - point_a
     delta = L/(count_points_integration-1)
     dict_weights = {
@@ -24,4 +24,4 @@ def select_polynomial_quadrature(point_a, point_b, count_points_integration):
         9: [point_a, point_a + delta, point_a + (2*delta), point_a + (3*delta), point_a + (4*delta), point_a + (5*delta), point_a + (6*delta), point_a + (7*delta), point_b],
         10: [point_a, point_a + delta,point_a + (2*delta),point_a + (3*delta),point_a + (4*delta),point_a + (5*delta),point_a + (6*delta),point_a + (7*delta),point_a + (8*delta), point_b],
     }
-    return dict_weights, dict_points
+    return dict_points, dict_weights

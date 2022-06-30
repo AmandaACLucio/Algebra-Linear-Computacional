@@ -4,6 +4,10 @@ from src.utils.matrix_operations import function_task5
 
 def polynomial_quadrature(consts, count_points_integration, point_a, point_b):
 
-    zpoints, weights = select_polynomial_quadrature(
+    polynomial_table = select_polynomial_quadrature(
         count_points_integration, point_a, point_b)
-    return sum([function_task5(consts, zpoints[i])*weights[i] for i in range(count_points_integration)])
+
+    [zpoint, weight] = polynomial_table[0][count_points_integration], polynomial_table[1][count_points_integration]
+
+    
+    return sum([function_task5(consts, zpoint[i])*weight[i] for i in range(count_points_integration)])

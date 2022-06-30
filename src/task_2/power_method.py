@@ -1,6 +1,4 @@
 import math
-
-from numpy import einsum
 from src.utils.matrix_operations import multiply_matrix_vector
 
 
