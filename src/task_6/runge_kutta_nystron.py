@@ -59,6 +59,10 @@ def solve_runge_kutta_nystron(integration_step, integration_time, value_m, value
         list_define_moment_dict.append(moment_dict)
 
     dataframe = pd.DataFrame.from_dict(list_define_moment_dict)
+
+    if os.path.exists(path_csv_file):
+        os.remove(path_csv_file)
+
     dataframe.to_csv(path_csv_file, index=False)
     dataframe.plot(x='time', y=['displacement','velocity','acceleration'])
 
