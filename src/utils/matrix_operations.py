@@ -584,4 +584,6 @@ def function_task6(t, list_a, list_w):
 
 def derivative_function_task6(time, displacement, velocity, value_c, value_m, value_k, list_a, list_w):
     
-    return (function_task6(time, list_a, list_w)-value_c*velocity-value_k*displacement)/value_m
+    result = (function_task6(time, list_a, list_w)-value_c*velocity-value_k*displacement)/value_m
+
+    return result
