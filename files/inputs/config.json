@@ -8,7 +8,7 @@
     "xi": 1,
     "IDET": 0,
     "_coment2_": "PARTE 2",
-    "ICOD": 2,
+    "ICOD": 4,
     "TOLm": 0.0001,
     "_coment6_": "task 1",
     "theta1": 0.75,
@@ -31,11 +31,19 @@
     "value_delta_x1": 0.5,
     "value_delta_x2": 0.25,
     "_coment5_": "task 3",
-    "integration_step": 0,
-    "integration_time": 0,
-    "value_m": 0,
-    "value_c": 0,
-    "value_k": 0,
-    "list_a": [],
-    "list_w": []
+    "integration_step": 0.01,
+    "integration_time": 10,
+    "value_m": 1,
+    "value_c": 0.1,
+    "value_k": 2,
+    "list_a": [
+        1,
+        2,
+        1.5
+    ],
+    "list_w": [
+        0.05,
+        1,
+        2
+    ]
 }

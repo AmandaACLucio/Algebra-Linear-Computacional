@@ -568,9 +568,8 @@ def value_function(value_x, theta_1, theta_2):
 
 def function_task5(consts, x):
     [c1, c2, c3, c4] = consts
-    # return c1*math.exp(c2*x) + c3*x**c4
+    return c1*math.exp(c2*x) + c3*x**c4
     # return x**2 - 4*math.cos(x)
-    return 2 + x + 2*x**2
 
 
 def get_derivative_task5(consts, x):
@@ -590,4 +589,7 @@ def function_task6(t, list_a, list_w):
 
 def derivative_function_task6(time, displacement, velocity, value_c, value_m, value_k, list_a, list_w):
 
-    return (function_task6(time, list_a, list_w)-value_c*velocity-value_k*displacement)/value_m
+    result = (function_task6(time, list_a, list_w) -
+              value_c*velocity-value_k*displacement)/value_m
+
+    return result
