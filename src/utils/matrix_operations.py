@@ -546,14 +546,17 @@ def calc_jacobiano(value_x):
 
 
 def value_function(value_x, theta_1, theta_2):
-    
+
     function_1 = 2*value_x[1]**2 + value_x[0]**2 + 6*value_x[2]**2 - 1
 
-    function_2 = 8*value_x[1]**2 + 6*value_x[1]*value_x[0]**2 + 36*value_x[1]*value_x[0]*value_x[2] + 108*value_x[1]*value_x[2]**2 - theta_1
-    
+    function_2 = 8*value_x[1]**2 + 6*value_x[1]*value_x[0]**2 + 36 * \
+        value_x[1]*value_x[0]*value_x[2] + 108 * \
+        value_x[1]*value_x[2]**2 - theta_1
+
     function_3 = 60*value_x[1]**4 + 60*(value_x[1]**2)*(value_x[0]**2) + 576*(value_x[1]**2)*value_x[0]*value_x[2] + 2232*(value_x[1]**2)*(value_x[2]**2) + 252*(value_x[2]**2)*(value_x[0]**2) + 1296*(value_x[2]**3)*value_x[0] \
-        + 3348*value_x[2]**4 + 24*(value_x[0]**3)*value_x[2] + 3*value_x[0] - theta_2
-    
+        + 3348*value_x[2]**4 + 24*(value_x[0]**3) * \
+        value_x[2] + 3*value_x[0] - theta_2
+
     return [function_1, function_2, function_3]
 
     '''
@@ -565,14 +568,16 @@ def value_function(value_x, theta_1, theta_2):
 
 def function_task5(consts, x):
     [c1, c2, c3, c4] = consts
-    return c1*math.exp(c2*x) + c3*x**c4
+    # return c1*math.exp(c2*x) + c3*x**c4
     # return x**2 - 4*math.cos(x)
+    return 2 + x + 2*x**2
 
 
 def get_derivative_task5(consts, x):
     [c1, c2, c3, c4] = consts
     return c1*c2*math.exp(c2*x) + c3*c4*x**(c4-1)
     # return 2*x + 4*math.sin(x)
+
 
 def function_task6(t, list_a, list_w):
 
@@ -582,6 +587,7 @@ def function_task6(t, list_a, list_w):
     result = a1*math.sin(w1*t) + a2*math.sin(w2*t) + a3*math.cos(w3*t)
     return result
 
+
 def derivative_function_task6(time, displacement, velocity, value_c, value_m, value_k, list_a, list_w):
-    
+
     return (function_task6(time, list_a, list_w)-value_c*velocity-value_k*displacement)/value_m
